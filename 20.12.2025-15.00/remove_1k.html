@@ -19756,11 +19756,34 @@ window.addEventListener("scroll", () => {
 <script>
 (async function () {
 
+  /* ========= ELEMENT ========= */
   const slotSelect   = document.querySelector("select[name='slot']");
   const filterSelect = document.querySelector("select[name='filter']");
-  if (!slotSelect || !filterSelect) return;
+  const input        = document.querySelector("input[name='q']");
+  const cards        = document.querySelectorAll(".card");
 
-  const parts = window.location.pathname.split("/").filter(Boolean);
+  if (!slotSelect || !filterSelect || !input) return;
+
+  /* ========= LẤY STATE TỪ URL ========= */
+  const urlParams = new URLSearchParams(location.search);
+  const qFromUrl  = urlParams.get("q") || "";
+  input.value     = qFromUrl;
+
+  /* ========= FILTER THEO SEARCH ========= */
+  function applySearch() {
+    const keyword = input.value.trim().toLowerCase();
+    cards.forEach(card => {
+      const name = card.dataset.name || "";
+      card.style.display =
+        name.includes(keyword) ? "" : "none";
+    });
+  }
+
+  applySearch();                 // 👈 lọc ngay khi load
+  input.addEventListener("input", applySearch);
+
+  /* ========= SLOT / FILTER ========= */
+  const parts = location.pathname.split("/").filter(Boolean);
   const currentSlot =
     parts.length >= 2 ? parts[parts.length - 2] : "";
   const currentFilter =
@@ -19768,7 +19791,7 @@ window.addEventListener("scroll", () => {
       ? parts[parts.length - 1].replace(".html", "")
       : "all";
 
-  // 👇 LOAD slots.json
+  // load slots.json
   let slots = [];
   try {
     const res = await fetch("../slots.json");
@@ -19778,7 +19801,7 @@ window.addEventListener("scroll", () => {
     return;
   }
 
-  // build dropdown
+  // build slot dropdown
   for (const s of slots) {
     const opt = document.createElement("option");
     opt.value = s.file;
@@ -19789,9 +19812,15 @@ window.addEventListener("scroll", () => {
 
   filterSelect.value = currentFilter;
 
+  /* ========= ĐỔI SLOT / FILTER (GIỮ SEARCH) ========= */
   function go() {
-    window.location.href =
-      `../${slotSelect.value}/${filterSelect.value}.html`;
+    const q = input.value.trim();
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+
+    location.href =
+      `../${slotSelect.value}/${filterSelect.value}.html` +
+      (params.toString() ? `?${params}` : "");
   }
 
   slotSelect.addEventListener("change", go);
@@ -19799,25 +19828,6 @@ window.addEventListener("scroll", () => {
 
 })();
 </script>
-
-<script>
-(function () {
-  const input = document.querySelector("input[name='q']");
-  if (!input) return;
-
-  const cards = document.querySelectorAll(".card");
-
-  input.addEventListener("input", () => {
-    const q = input.value.trim().toLowerCase();
-
-    for (const card of cards) {
-      const name = card.dataset.name || "";
-      card.style.display = name.includes(q) ? "" : "none";
-    }
-  });
-})();
-</script>
-
 
 </body>
 </html>
