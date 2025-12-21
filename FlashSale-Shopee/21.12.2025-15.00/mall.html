@@ -8212,12 +8212,17 @@ window.addEventListener("scroll", () => {
     const q = input.value.trim();
     const params = new URLSearchParams();
     if (q) params.set("q", q);
+
     const BASE = "/FlashSale-Shopee";
+    const slot = slotSelect.value;
+    const filter = filterSelect.value || "mall"; // 👈 CHỐT LỖI Ở ĐÂY
 
     location.href =
-      `${BASE}/${slotSelect.value}/${filterSelect.value}.html` +
+      `${BASE}/${slot}/${filter}.html` +
       (params.toString() ? `?${params}` : "");
   }
+
+
 
   slotSelect.addEventListener("change", go);
   filterSelect.addEventListener("change", go);
