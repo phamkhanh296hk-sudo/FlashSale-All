@@ -20351,7 +20351,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch("../slots.json");
+    const res = await fetch(`../slots.json?v=${Date.now()}`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
@@ -20391,6 +20391,12 @@ window.addEventListener("scroll", () => {
 
 })();
 </script>
-
+<script>
+if (!location.search.includes("v=")) {
+  location.replace(
+    location.pathname + "?v=" + Date.now()
+  );
+}
+</script>
 </body>
 </html>
