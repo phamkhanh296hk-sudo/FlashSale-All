@@ -340,11 +340,18 @@ const ITEMS = [{"itemid": 29911049138, "shopid": 1124576885, "catid": 100638, "p
 const grid = document.querySelector(".grid");
 const searchInput = document.querySelector("input[name='q']");
 
+const urlParams = new URLSearchParams(location.search);
+const qFromUrl = (urlParams.get("q") || "").toLowerCase();
+searchInput.value = qFromUrl;
+
 const BATCH_SIZE = 40;
 let cursor = 0;
 
-let baseItems = ITEMS;
-let filteredItems = ITEMS;
+let pageItems = ITEMS;
+
+let filteredItems = qFromUrl
+  ? pageItems.filter(it => it.name.toLowerCase().includes(qFromUrl))
+  : pageItems;
 
 function renderNextBatch() {
   if (cursor >= filteredItems.length) return;
@@ -353,33 +360,32 @@ function renderNextBatch() {
   cursor += BATCH_SIZE;
 
   const html = slice.map(it => `
-    <div class="card" data-name="${it.name.toLowerCase()}">
+    <div class="card">
       ${it.discount ? `<div class="badge">-${it.discount}%</div>` : ""}
-
       <a href="${it.productUrl}" target="_blank">
         <img src="${it.imageUrl}" loading="lazy">
       </a>
-
       <div class="name">${it.name}</div>
-      <div>
-        <span class="price">
-          ${(it.price / 100000).toLocaleString()}₫
-        </span>
-        ${
-          it.price_before_discount
-            ? `<span class="before">
-                ${(it.price_before_discount / 100000).toLocaleString()}₫
-              </span>`
-            : ""
-        }
-      </div>
     </div>
   `).join("");
 
   grid.insertAdjacentHTML("beforeend", html);
 }
 
+grid.innerHTML = "";
+cursor = 0;
 renderNextBatch();
+
+searchInput.addEventListener("input", () => {
+  const kw = searchInput.value.trim().toLowerCase();
+  filteredItems = kw
+    ? pageItems.filter(it => it.name.toLowerCase().includes(kw))
+    : pageItems;
+
+  grid.innerHTML = "";
+  cursor = 0;
+  renderNextBatch();
+});
 
 const sentinel = document.createElement("div");
 sentinel.style.height = "1px";
@@ -387,28 +393,18 @@ grid.after(sentinel);
 
 new IntersectionObserver(e => {
   if (e[0].isIntersecting) renderNextBatch();
-}, { rootMargin: "400px" }).observe(sentinel);
-
-/* SEARCH */
-searchInput.addEventListener("input", () => {
-  const keyword = searchInput.value.trim().toLowerCase();
-  filteredItems = keyword
-    ? baseItems.filter(it => it.name.toLowerCase().includes(keyword))
-    : baseItems;
-
-  grid.innerHTML = "";
-  cursor = 0;
-  renderNextBatch();
-});
-</script>
-<script>
+},{ rootMargin:"400px" }).observe(sentinel);
 function onDiscountChange(val){
+  const q = document.querySelector("input[name='q']").value.trim();
+  const qs = q ? `?q=${encodeURIComponent(q)}` : "";
+
   if(val === "0"){
-    window.location.href = "index.html";
+    window.location.href = "index.html" + qs;
   } else {
-    window.location.href = "discount_" + val + ".html";
+    window.location.href = "discount_" + val + ".html" + qs;
   }
 }
+
 </script>
 
 </body>
