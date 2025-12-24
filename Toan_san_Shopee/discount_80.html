@@ -381,6 +381,19 @@ function renderNextBatch() {
             : ""
         }
       </div>
+
+      <div class="meta">
+        ${
+          it.sold !== undefined
+            ? `<div>📦 Kho: ${it.sold}</div>`
+            : ""
+        }
+        ${
+          it.rating && it.rating_count
+            ? `<div>⭐ ${it.rating}/5 (${it.rating_count} đánh giá)</div>`
+            : ""
+        }
+      </div>
     </div>
   `).join("");
   grid.insertAdjacentHTML("beforeend", html);
