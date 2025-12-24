@@ -343,12 +343,7 @@ const searchInput = document.querySelector("input[name='q']");
 const urlParams = new URLSearchParams(location.search);
 const qFromUrl = (urlParams.get("q") || "").toLowerCase();
 searchInput.value = qFromUrl;
-const discountSelect = document.querySelector("select[name='discount']");
-const match = location.pathname.match(/discount_(\d+)\.html/);
 
-if (discountSelect) {
-  discountSelect.value = match ? match[1] : "0";
-}
 const BATCH_SIZE = 40;
 let cursor = 0;
 
