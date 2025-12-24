@@ -1,0 +1,502 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>⚡ Danh mục sản phẩm HOT Shopee</title>
+
+<!-- Manrope (gần giống Lazada / Euclid Circular A) -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  font-family: "Manrope", sans-serif;
+  background:#f5f5f5;
+  margin:0;
+  padding:16px;
+}
+
+/* ===== TITLE ===== */
+h1{
+  text-align:center;
+  color:#ee4d2d;
+  font-size:36px; /* 👈 to gấp đôi */
+  margin-bottom:20px;
+}
+
+.flash-note{
+  text-align:center;
+  font-size:14px;
+  line-height:1.6;
+  color:#555;
+  margin-bottom:20px;
+}
+
+.flash-note strong{
+  color:#111;
+}
+
+.flash-note a{
+  color:#ee4d2d;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.flash-note a:hover{
+  text-decoration:underline;
+}
+
+/* ===== FILTER PANEL ===== */
+.panel{
+  background:#fff;
+  padding:16px;
+  border-radius:12px;
+  margin-bottom:20px;
+
+  /* 👇 QUAN TRỌNG */
+  width: calc(
+    6 * ((100vw - 5 * clamp(10px,1.5vw,16px)) / 6)
+    + 5 * clamp(10px,1.5vw,16px)
+  );
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.grid-filter{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px 40px;
+}
+.grid-filter > div{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+label{
+  font-size:1.2vw;        /* 👈 to gấp đôi */
+  margin-bottom:8px;
+  text-align:left;
+}
+
+select,
+input{
+  width: calc(
+    2 * (100vw - 5 * clamp(10px,1.5vw,16px)) / 6
+  );                    /* 👈 = 2 card */
+
+  padding: 0.6em 0.8em; /* 👈 chiều cao theo chữ */
+  font-size: 1.2cqw;      /* 👈 chữ scale theo khung */
+
+  border:1px solid #dcdcdc;
+  border-radius:10px;
+  line-height:1.2;
+}
+
+
+
+/* ===== PRODUCT GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(
+    6,
+    calc((100vw - 5 * clamp(10px,1.5vw,16px)) / 6)
+  );
+  gap:clamp(10px,1.5vw,16px);
+}
+
+
+/* Mobile */
+@media (max-width:1024px){
+
+  .panel{
+    width: 100%;
+  }
+  .flash-note{
+    font-size:2.2rem;
+  }
+  .grid{
+    width: 100%;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid-filter{
+    grid-template-columns:1fr;
+  }
+
+  select,
+  input{
+    width: 100%;          /* 👈 QUAN TRỌNG */
+    font-size: 3rem;      /* chỉnh chữ tại đây */
+    padding: 0.7em 0.9em;
+  }
+
+  label{
+    font-size: 3rem;    /* chỉnh label tại đây */
+  }
+}
+
+
+
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  border-radius:15px;
+  padding:8px;                 /* cho card thở */
+  position:relative;
+
+  aspect-ratio:3 / 4.2;         /* cao hơn chút như bạn yêu cầu */
+  display:flex;
+  flex-direction:column;
+  container-type:inline-size;
+  border:3px solid #000;  
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;      /* 👈 bắt buộc */
+}
+
+
+/* Image */
+.card a{
+  width:100%;
+  aspect-ratio:1 / 1;
+  display:block;
+  padding:3%;              /* 👈 tạo khoảng hở đều */
+  box-sizing:border-box;
+}
+
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:15px;
+}
+.card:hover{
+  transform: scale(1.04);       /* 👈 chuẩn, KHÔNG nên > 1.06 */
+  z-index: 5;                   /* 👈 tránh bị card khác đè */
+  box-shadow:0 14px 32px rgba(0,0,0,0.18);
+}
+
+/* Badge */
+.badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  background:#e60000;
+  color:#fff;
+  font-size:8cqw;
+  padding:0.25em 0.4em;
+  border-radius:6px;
+}
+
+.shop-badge{
+  position:absolute;
+  top:8px;
+  right:8px;
+  font-size:6cqw;
+  padding:0.25em 0.5em;
+  border-radius:6px;
+  font-weight:700;
+  color:#fff;              /* 👈 CHỮ TRẮNG */
+}
+
+.mall{
+  background:#d0011b;      /* 👈 ĐỎ ĐẬM (Mall) */
+}
+
+.preferred,
+.preferred-plus{
+  background:#ee4d2d;      /* 👈 CAM (Yêu thích) */
+}
+
+
+/* ===== TEXT TRONG SẢN PHẨM SCALE THEO CHIỀU RỘNG KHUNG ===== */
+
+.name{
+  font-size: clamp(16px, 8cqw, 36px);   /* ≈ 1/20 chiều rộng */
+  line-height:1.25;
+  margin:0.6em 0 0.8em;
+  height:2.6em;                         /* khóa 2 dòng */
+  overflow:hidden;
+  font-weight:1000;
+}
+
+.price{
+  font-size: clamp(16px, 10cqw, 44px);
+  font-weight:1000;
+  color:#d0011b;
+}
+
+.before{
+  font-size: clamp(16px, 8cqw, 36px);
+  text-decoration:line-through;
+  font-weight:1000;
+  color:#999;
+  margin-left:0.4em;
+}
+
+.meta{
+  font-size: clamp(16px, 7cqw, 36px);
+  color:#666;
+  margin-top:0.8em;
+  margin-bottom:0.2em;   /* 👈 GIÃN XUỐNG DƯỚI */
+
+  display:flex;
+  flex-direction:column;
+  gap:0.4em;
+}
+
+/* ===== TO TOP BUTTON ===== */
+#toTop{
+  position:fixed;
+  bottom:32px;
+  right:32px;
+
+  width:150px;
+  height:150px;
+  border-radius:50%;
+
+  background:#1e71ff;
+  color:#fff;
+  border:none;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:120px;        /* 👈 GIẢM 1 CHÚT */
+  line-height:1;          /* 👈 QUAN TRỌNG */
+  cursor:pointer;
+  display:none;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  z-index:999;
+}
+
+
+#toTop:hover{
+  background:#d43c1f;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Danh mục sản phẩm HOT Shopee</h1>
+
+<div class="flash-note">
+  ⚡ <strong>SĂN DEAL 1K, 9K, DEAL HOT, LỖI GIÁ CÁC KHUNG GIỜ</strong><br>
+  👉 Tham gia ngay để không bỏ lỡ các deal hot:
+  <a href="https://t.me/dealhotday" target="_blank">
+    https://t.me/dealhotday
+  </a>
+</div>
+
+
+<form class="panel" onsubmit="return false;">
+  <div class="grid-filter">
+
+    <div>
+      <label>Tìm kiếm sản phẩm</label>
+      <input name="q" value="">
+    </div>
+    <div>
+      <label>Lọc theo giảm giá</label>
+      <select name="discount" onchange="onDiscountChange(this.value)">
+        <option value="0">Tất cả</option>
+        <option value="60">≥ 60%</option>
+        <option value="70">≥ 70%</option>
+        <option value="80">≥ 80%</option>
+        <option value="90">≥ 90%</option>
+      </select>
+    </div>
+
+  </div>
+</form>
+
+<div class="grid">
+
+  <div class="card"
+       data-name="in anh bỏ ví in hình 3 tấm theo yêu cầu làm quà tặng chất liệu cao cấp chính hãng leeman a001 combo 3 hình"
+       data-discount="99">
+    <div class="badge">-99%</div>
+    <a href="https://s.shopee.vn/6VH3yAAJ2e" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mbkd4fbxtvlwea">
+    </a>
+    <div class="name">In Anh Bỏ Ví In Hình 3 Tấm Theo Yêu Cầu Làm Quà Tặng Chất Liệu Cao Cấp Chính Hãng LEEMAN A001 Combo 3 hình</div>
+    <div>
+        <span class="price">1,000₫</span>
+        <span class="before">75,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ốp lưng chống sốc cho iphone, trong suốt,ktmstore ip 6 7 8plus xsmax 11 12 13 14 promax 15 16 17air 17 pro max"
+       data-discount="96">
+    <div class="badge">-96%</div>
+    <a href="https://s.shopee.vn/6KxdlrAwNd" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmiri5gjqokf88">
+    </a>
+    <div class="name">Ốp lưng chống sốc cho iPhone, trong suốt,KTMStore ip 6 7 8Plus Xsmax 11 12 13 14 promax 15 16 17Air 17 Pro max</div>
+    <div>
+        <span class="price">1,000₫</span>
+        <span class="before">25,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[hàng tặng không bán] nước tắm gội thảo dược cho bé kutieskin gói 10ml hn0564"
+       data-discount="94">
+    <div class="badge">-94%</div>
+    <a href="https://s.shopee.vn/6AeDZYBZic" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m807lacwr6v652">
+    </a>
+    <div class="name">[HÀNG TẶNG KHÔNG BÁN] Nước tắm gội thảo dược cho bé Kutieskin gói 10ml HN0564</div>
+    <div>
+        <span class="price">11,110₫</span>
+        <span class="before">200,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[sale 60%] hộp 20 bút chì khúc deli - bút chì ruột đậm hình dễ thương chì đốt 2b có ngòi thay cho bé tập viết vẽ tranh"
+       data-discount="93">
+    <div class="badge">-93%</div>
+    <a href="https://s.shopee.vn/60KnNFCD3b" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rcc8-ls5kka1rukhje3">
+    </a>
+    <div class="name">[SALE 60%] Hộp 20 Bút chì khúc DELI - Bút Chì Ruột Đậm Hình Dễ Thương Chì Đốt 2B Có Ngòi Thay Cho Bé Tập Viết Vẽ Tranh</div>
+    <div>
+        <span class="price">3,000₫</span>
+        <span class="before">40,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="combo 10 vở ô ly học sinh hoạt hình dễ thương deli-4 5 ô ly - 48 80 trang 70/100gsm phù hơp cho các bé tiểu học"
+       data-discount="92">
+    <div class="badge">-92%</div>
+    <a href="https://s.shopee.vn/5q1NAwCqOa" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-md2mi8343lppc6">
+    </a>
+    <div class="name">COMBO 10 Vở Ô Ly Học Sinh Hoạt Hình Dễ Thương Deli-4 5 Ô Ly - 48 80 Trang 70/100gsm Phù Hơp Cho Các Bé Tiểu Học</div>
+    <div>
+        <span class="price">11,000₫</span>
+        <span class="before">144,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[voucher 60k] ổ cắm điện đa năng 2500/3250w deli cổng type c usb sạc nhanh 20w dây 2-5m chống cháy nổ phù nhiều giắc cắm"
+       data-discount="92">
+    <div class="badge">-92%</div>
+    <a href="https://s.shopee.vn/4VVzaUIGPY" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lueiu5g9y3v573">
+    </a>
+    <div class="name">[VOUCHER 60K] Ổ Cắm Điện Đa Năng 2500/3250W DELI Cổng Type C USB Sạc Nhanh 20W Dây 2-5M Chống Cháy Nổ Phù Nhiều Giắc Cắm</div>
+    <div>
+        <span class="price">13,000₫</span>
+        <span class="before">160,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[4k/bút] combo 20 cây bút gel mực tím/xanh/đen học sinh cấp 1 deli 0.5mm mực an toàn trơn tru, có đệm tay bé tập viết"
+       data-discount="90">
+    <div class="badge">-90%</div>
+    <a href="https://s.shopee.vn/4LCZOBItkX" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mdmpkw0tys6n97">
+    </a>
+    <div class="name">[4K/BÚT] Combo 20 Cây Bút Gel Mực Tím/Xanh/Đen Học Sinh Cấp 1 Deli 0.5mm Mực An Toàn Trơn Tru, Có Đệm Tay Bé Tập Viết</div>
+    <div>
+        <span class="price">15,000₫</span>
+        <span class="before">144,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="thanh treo đa năng emomart e02, inox 304 không rỉ, lắp đặt không cần khoan bắt vít có thể kéo ra thu vào theo size thanh"
+       data-discount="90">
+    <div class="badge">-90%</div>
+    <a href="https://s.shopee.vn/4At9BsJX5W" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m0vdj155rvn1cd">
+    </a>
+    <div class="name">Thanh Treo Đa Năng EMOMART E02, Inox 304 không rỉ, Lắp đặt không cần khoan bắt vít có thể kéo ra thu vào theo size thanh</div>
+    <div>
+        <span class="price">5,998₫</span>
+        <span class="before">62,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ly giữ nhiệt flower melli inox 316 có ống hút và lõi lọc trà cao cấp 600ml"
+       data-discount="90">
+    <div class="badge">-90%</div>
+    <a href="https://s.shopee.vn/40ZizZKAQV" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m6r6qeywkoc83e">
+    </a>
+    <div class="name">Ly giữ nhiệt Flower Melli inox 316 có ống hút và lõi lọc trà cao cấp 600ml</div>
+    <div>
+        <span class="price">9,997₫</span>
+        <span class="before">100,000₫</span>
+    </div>
+  </div>
+
+
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+<script>
+const btn = document.getElementById("toTop");
+window.addEventListener("scroll", () => {
+  btn.style.display = window.scrollY > 400 ? "block" : "none";
+});
+</script>
+<script>
+const input = document.querySelector("input[name='q']");
+const cards = document.querySelectorAll(".card");
+
+function applyFilter() {
+  const keyword = input.value.trim().toLowerCase();
+  const minDiscount = Number(discountSelect.value);
+
+  cards.forEach(card => {
+    const name = card.dataset.name || "";
+    const discount = Number(card.dataset.discount || 0);
+
+    const okName = name.includes(keyword);
+    const okDiscount = discount >= minDiscount;
+
+    card.style.display = (okName && okDiscount) ? "" : "none";
+  });
+}
+
+input.addEventListener("input", applyFilter);
+applyFilter();
+</script>
+<script>
+function onDiscountChange(val){
+  if(val === "0"){
+    window.location.href = "index.html";
+  } else {
+    window.location.href = "discount_" + val + ".html";
+  }
+}
+</script>
+
+</body>
+</html>

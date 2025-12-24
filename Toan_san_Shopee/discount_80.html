@@ -1,0 +1,1672 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>⚡ Danh mục sản phẩm HOT Shopee</title>
+
+<!-- Manrope (gần giống Lazada / Euclid Circular A) -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  font-family: "Manrope", sans-serif;
+  background:#f5f5f5;
+  margin:0;
+  padding:16px;
+}
+
+/* ===== TITLE ===== */
+h1{
+  text-align:center;
+  color:#ee4d2d;
+  font-size:36px; /* 👈 to gấp đôi */
+  margin-bottom:20px;
+}
+
+.flash-note{
+  text-align:center;
+  font-size:14px;
+  line-height:1.6;
+  color:#555;
+  margin-bottom:20px;
+}
+
+.flash-note strong{
+  color:#111;
+}
+
+.flash-note a{
+  color:#ee4d2d;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.flash-note a:hover{
+  text-decoration:underline;
+}
+
+/* ===== FILTER PANEL ===== */
+.panel{
+  background:#fff;
+  padding:16px;
+  border-radius:12px;
+  margin-bottom:20px;
+
+  /* 👇 QUAN TRỌNG */
+  width: calc(
+    6 * ((100vw - 5 * clamp(10px,1.5vw,16px)) / 6)
+    + 5 * clamp(10px,1.5vw,16px)
+  );
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.grid-filter{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px 40px;
+}
+.grid-filter > div{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+label{
+  font-size:1.2vw;        /* 👈 to gấp đôi */
+  margin-bottom:8px;
+  text-align:left;
+}
+
+select,
+input{
+  width: calc(
+    2 * (100vw - 5 * clamp(10px,1.5vw,16px)) / 6
+  );                    /* 👈 = 2 card */
+
+  padding: 0.6em 0.8em; /* 👈 chiều cao theo chữ */
+  font-size: 1.2cqw;      /* 👈 chữ scale theo khung */
+
+  border:1px solid #dcdcdc;
+  border-radius:10px;
+  line-height:1.2;
+}
+
+
+
+/* ===== PRODUCT GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(
+    6,
+    calc((100vw - 5 * clamp(10px,1.5vw,16px)) / 6)
+  );
+  gap:clamp(10px,1.5vw,16px);
+}
+
+
+/* Mobile */
+@media (max-width:1024px){
+
+  .panel{
+    width: 100%;
+  }
+  .flash-note{
+    font-size:2.2rem;
+  }
+  .grid{
+    width: 100%;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid-filter{
+    grid-template-columns:1fr;
+  }
+
+  select,
+  input{
+    width: 100%;          /* 👈 QUAN TRỌNG */
+    font-size: 3rem;      /* chỉnh chữ tại đây */
+    padding: 0.7em 0.9em;
+  }
+
+  label{
+    font-size: 3rem;    /* chỉnh label tại đây */
+  }
+}
+
+
+
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  border-radius:15px;
+  padding:8px;                 /* cho card thở */
+  position:relative;
+
+  aspect-ratio:3 / 4.2;         /* cao hơn chút như bạn yêu cầu */
+  display:flex;
+  flex-direction:column;
+  container-type:inline-size;
+  border:3px solid #000;  
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;      /* 👈 bắt buộc */
+}
+
+
+/* Image */
+.card a{
+  width:100%;
+  aspect-ratio:1 / 1;
+  display:block;
+  padding:3%;              /* 👈 tạo khoảng hở đều */
+  box-sizing:border-box;
+}
+
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:15px;
+}
+.card:hover{
+  transform: scale(1.04);       /* 👈 chuẩn, KHÔNG nên > 1.06 */
+  z-index: 5;                   /* 👈 tránh bị card khác đè */
+  box-shadow:0 14px 32px rgba(0,0,0,0.18);
+}
+
+/* Badge */
+.badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  background:#e60000;
+  color:#fff;
+  font-size:8cqw;
+  padding:0.25em 0.4em;
+  border-radius:6px;
+}
+
+.shop-badge{
+  position:absolute;
+  top:8px;
+  right:8px;
+  font-size:6cqw;
+  padding:0.25em 0.5em;
+  border-radius:6px;
+  font-weight:700;
+  color:#fff;              /* 👈 CHỮ TRẮNG */
+}
+
+.mall{
+  background:#d0011b;      /* 👈 ĐỎ ĐẬM (Mall) */
+}
+
+.preferred,
+.preferred-plus{
+  background:#ee4d2d;      /* 👈 CAM (Yêu thích) */
+}
+
+
+/* ===== TEXT TRONG SẢN PHẨM SCALE THEO CHIỀU RỘNG KHUNG ===== */
+
+.name{
+  font-size: clamp(16px, 8cqw, 36px);   /* ≈ 1/20 chiều rộng */
+  line-height:1.25;
+  margin:0.6em 0 0.8em;
+  height:2.6em;                         /* khóa 2 dòng */
+  overflow:hidden;
+  font-weight:1000;
+}
+
+.price{
+  font-size: clamp(16px, 10cqw, 44px);
+  font-weight:1000;
+  color:#d0011b;
+}
+
+.before{
+  font-size: clamp(16px, 8cqw, 36px);
+  text-decoration:line-through;
+  font-weight:1000;
+  color:#999;
+  margin-left:0.4em;
+}
+
+.meta{
+  font-size: clamp(16px, 7cqw, 36px);
+  color:#666;
+  margin-top:0.8em;
+  margin-bottom:0.2em;   /* 👈 GIÃN XUỐNG DƯỚI */
+
+  display:flex;
+  flex-direction:column;
+  gap:0.4em;
+}
+
+/* ===== TO TOP BUTTON ===== */
+#toTop{
+  position:fixed;
+  bottom:32px;
+  right:32px;
+
+  width:150px;
+  height:150px;
+  border-radius:50%;
+
+  background:#1e71ff;
+  color:#fff;
+  border:none;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:120px;        /* 👈 GIẢM 1 CHÚT */
+  line-height:1;          /* 👈 QUAN TRỌNG */
+  cursor:pointer;
+  display:none;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  z-index:999;
+}
+
+
+#toTop:hover{
+  background:#d43c1f;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Danh mục sản phẩm HOT Shopee</h1>
+
+<div class="flash-note">
+  ⚡ <strong>SĂN DEAL 1K, 9K, DEAL HOT, LỖI GIÁ CÁC KHUNG GIỜ</strong><br>
+  👉 Tham gia ngay để không bỏ lỡ các deal hot:
+  <a href="https://t.me/dealhotday" target="_blank">
+    https://t.me/dealhotday
+  </a>
+</div>
+
+
+<form class="panel" onsubmit="return false;">
+  <div class="grid-filter">
+
+    <div>
+      <label>Tìm kiếm sản phẩm</label>
+      <input name="q" value="">
+    </div>
+    <div>
+      <label>Lọc theo giảm giá</label>
+      <select name="discount" onchange="onDiscountChange(this.value)">
+        <option value="0">Tất cả</option>
+        <option value="60">≥ 60%</option>
+        <option value="70">≥ 70%</option>
+        <option value="80">≥ 80%</option>
+        <option value="90">≥ 90%</option>
+      </select>
+    </div>
+
+  </div>
+</form>
+
+<div class="grid">
+
+  <div class="card"
+       data-name="in anh bỏ ví in hình 3 tấm theo yêu cầu làm quà tặng chất liệu cao cấp chính hãng leeman a001 combo 3 hình"
+       data-discount="99">
+    <div class="badge">-99%</div>
+    <a href="https://s.shopee.vn/6VH3yAAJ2e" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mbkd4fbxtvlwea">
+    </a>
+    <div class="name">In Anh Bỏ Ví In Hình 3 Tấm Theo Yêu Cầu Làm Quà Tặng Chất Liệu Cao Cấp Chính Hãng LEEMAN A001 Combo 3 hình</div>
+    <div>
+        <span class="price">1,000₫</span>
+        <span class="before">75,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ốp lưng chống sốc cho iphone, trong suốt,ktmstore ip 6 7 8plus xsmax 11 12 13 14 promax 15 16 17air 17 pro max"
+       data-discount="96">
+    <div class="badge">-96%</div>
+    <a href="https://s.shopee.vn/6KxdlrAwNd" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmiri5gjqokf88">
+    </a>
+    <div class="name">Ốp lưng chống sốc cho iPhone, trong suốt,KTMStore ip 6 7 8Plus Xsmax 11 12 13 14 promax 15 16 17Air 17 Pro max</div>
+    <div>
+        <span class="price">1,000₫</span>
+        <span class="before">25,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[hàng tặng không bán] nước tắm gội thảo dược cho bé kutieskin gói 10ml hn0564"
+       data-discount="94">
+    <div class="badge">-94%</div>
+    <a href="https://s.shopee.vn/6AeDZYBZic" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m807lacwr6v652">
+    </a>
+    <div class="name">[HÀNG TẶNG KHÔNG BÁN] Nước tắm gội thảo dược cho bé Kutieskin gói 10ml HN0564</div>
+    <div>
+        <span class="price">11,110₫</span>
+        <span class="before">200,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[sale 60%] hộp 20 bút chì khúc deli - bút chì ruột đậm hình dễ thương chì đốt 2b có ngòi thay cho bé tập viết vẽ tranh"
+       data-discount="93">
+    <div class="badge">-93%</div>
+    <a href="https://s.shopee.vn/60KnNFCD3b" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rcc8-ls5kka1rukhje3">
+    </a>
+    <div class="name">[SALE 60%] Hộp 20 Bút chì khúc DELI - Bút Chì Ruột Đậm Hình Dễ Thương Chì Đốt 2B Có Ngòi Thay Cho Bé Tập Viết Vẽ Tranh</div>
+    <div>
+        <span class="price">3,000₫</span>
+        <span class="before">40,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="combo 10 vở ô ly học sinh hoạt hình dễ thương deli-4 5 ô ly - 48 80 trang 70/100gsm phù hơp cho các bé tiểu học"
+       data-discount="92">
+    <div class="badge">-92%</div>
+    <a href="https://s.shopee.vn/5q1NAwCqOa" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-md2mi8343lppc6">
+    </a>
+    <div class="name">COMBO 10 Vở Ô Ly Học Sinh Hoạt Hình Dễ Thương Deli-4 5 Ô Ly - 48 80 Trang 70/100gsm Phù Hơp Cho Các Bé Tiểu Học</div>
+    <div>
+        <span class="price">11,000₫</span>
+        <span class="before">144,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[voucher 60k] ổ cắm điện đa năng 2500/3250w deli cổng type c usb sạc nhanh 20w dây 2-5m chống cháy nổ phù nhiều giắc cắm"
+       data-discount="92">
+    <div class="badge">-92%</div>
+    <a href="https://s.shopee.vn/4VVzaUIGPY" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lueiu5g9y3v573">
+    </a>
+    <div class="name">[VOUCHER 60K] Ổ Cắm Điện Đa Năng 2500/3250W DELI Cổng Type C USB Sạc Nhanh 20W Dây 2-5M Chống Cháy Nổ Phù Nhiều Giắc Cắm</div>
+    <div>
+        <span class="price">13,000₫</span>
+        <span class="before">160,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[4k/bút] combo 20 cây bút gel mực tím/xanh/đen học sinh cấp 1 deli 0.5mm mực an toàn trơn tru, có đệm tay bé tập viết"
+       data-discount="90">
+    <div class="badge">-90%</div>
+    <a href="https://s.shopee.vn/4LCZOBItkX" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mdmpkw0tys6n97">
+    </a>
+    <div class="name">[4K/BÚT] Combo 20 Cây Bút Gel Mực Tím/Xanh/Đen Học Sinh Cấp 1 Deli 0.5mm Mực An Toàn Trơn Tru, Có Đệm Tay Bé Tập Viết</div>
+    <div>
+        <span class="price">15,000₫</span>
+        <span class="before">144,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="thanh treo đa năng emomart e02, inox 304 không rỉ, lắp đặt không cần khoan bắt vít có thể kéo ra thu vào theo size thanh"
+       data-discount="90">
+    <div class="badge">-90%</div>
+    <a href="https://s.shopee.vn/4At9BsJX5W" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m0vdj155rvn1cd">
+    </a>
+    <div class="name">Thanh Treo Đa Năng EMOMART E02, Inox 304 không rỉ, Lắp đặt không cần khoan bắt vít có thể kéo ra thu vào theo size thanh</div>
+    <div>
+        <span class="price">5,998₫</span>
+        <span class="before">62,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ly giữ nhiệt flower melli inox 316 có ống hút và lõi lọc trà cao cấp 600ml"
+       data-discount="90">
+    <div class="badge">-90%</div>
+    <a href="https://s.shopee.vn/40ZizZKAQV" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m6r6qeywkoc83e">
+    </a>
+    <div class="name">Ly giữ nhiệt Flower Melli inox 316 có ống hút và lõi lọc trà cao cấp 600ml</div>
+    <div>
+        <span class="price">9,997₫</span>
+        <span class="before">100,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="áo vest lamer dáng ngắn hoa cài l65d22t009"
+       data-discount="89">
+    <div class="badge">-89%</div>
+    <a href="https://s.shopee.vn/5AlgNiFj3k" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134211-820l4-mia47atr4b2f41">
+    </a>
+    <div class="name">Áo Vest LAMER Dáng Ngắn Hoa Cài L65D22T009</div>
+    <div>
+        <span class="price">113,850₫</span>
+        <span class="before">990,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="cài áo nữ nhật vy hình hoa tuyết nhỏ xinh xắn đính đá dễ thương - ab012"
+       data-discount="89">
+    <div class="badge">-89%</div>
+    <a href="https://s.shopee.vn/7AWklO7px2" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lf5ctdm8yutm49">
+    </a>
+    <div class="name">Cài áo nữ Nhật Vy hình hoa tuyết nhỏ xinh xắn đính đá dễ thương - AB012</div>
+    <div>
+        <span class="price">9,000₫</span>
+        <span class="before">80,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="sổ tay bìa da deli a5/a6 – sổ da kẻ ngang 300 trang, giấy dày chống nước cao cấp – sổ ghi chép kế hoạch, sổ planner"
+       data-discount="89">
+    <div class="badge">-89%</div>
+    <a href="https://s.shopee.vn/70DKZ58TI1" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mfs0nl4st7nzdd">
+    </a>
+    <div class="name">Sổ Tay Bìa Da Deli A5/A6 – Sổ Da Kẻ Ngang 300 Trang, Giấy Dày Chống Nước Cao Cấp – Sổ Ghi Chép Kế Hoạch, Sổ Planner</div>
+    <div>
+        <span class="price">7,000₫</span>
+        <span class="before">63,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ay (cn) vòng cổ zircon nơ trái tim đơn giản cho nữ mặt dây chuyền pha lê choker phụ kiện trang sức"
+       data-discount="88">
+    <div class="badge">-88%</div>
+    <a href="https://s.shopee.vn/6ptuMm96d0" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rdy9-m0ihvhozhzgp94">
+    </a>
+    <div class="name">Ay (CN) Vòng Cổ Zircon Nơ Trái Tim Đơn Giản Cho Nữ Mặt Dây Chuyền Pha Lê Choker Phụ Kiện Trang Sức</div>
+    <div>
+        <span class="price">5,719₫</span>
+        <span class="before">48,557₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[ quà tặng không bán] thiệp giấy cao cấp thương hiệu leeman thiệp viết tay ý nghĩa"
+       data-discount="88">
+    <div class="badge">-88%</div>
+    <a href="https://s.shopee.vn/6faUAT9jxz" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m24omz2cvlp7fd">
+    </a>
+    <div class="name">[ QUÀ TẶNG KHÔNG BÁN] Thiệp Giấy Cao Cấp Thương Hiệu LEEMAN Thiệp Viết Tay Ý Nghĩa</div>
+    <div>
+        <span class="price">2,415₫</span>
+        <span class="before">20,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[quà tặng] dekey bộ vệ sinh điện thoại máy tính bảng làm sạch kính mà không trầy thiết bị"
+       data-discount="87">
+    <div class="badge">-87%</div>
+    <a href="https://s.shopee.vn/7pmRYc5IbE" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mi71jzzeb1u026">
+    </a>
+    <div class="name">[QUÀ TẶNG] DEKEY Bộ Vệ Sinh Điện Thoại Máy Tính Bảng Làm Sạch Kính Mà Không Trầy Thiết Bị</div>
+    <div>
+        <span class="price">9,000₫</span>
+        <span class="before">69,800₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[họa cụ deli] bút sơn acrylic marker deli thêm 80% mực-12/24/36/48/64/80 màu tô trên mọi chất liệu vẽ giày vải chai lọ"
+       data-discount="86">
+    <div class="badge">-86%</div>
+    <a href="https://s.shopee.vn/AKTmXCvVTh" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m2hns5kk7fzmb0">
+    </a>
+    <div class="name">[HỌA CỤ DELI] Bút Sơn Acrylic Marker Deli THÊM 80% MỰC-12/24/36/48/64/80 Màu Tô Trên Mọi Chất Liệu Vẽ Giày Vải Chai Lọ</div>
+    <div>
+        <span class="price">7,000₫</span>
+        <span class="before">49,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[chính hãng] bút sơn màu acrylic marker chính hãng deli thêm 80% mực 12/24/36/48/64 màu tô trên mọi chất liệu"
+       data-discount="86">
+    <div class="badge">-86%</div>
+    <a href="https://s.shopee.vn/AAAMKtw8og" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m4o4xm43qmqo74">
+    </a>
+    <div class="name">[CHÍNH HÃNG] Bút Sơn Màu Acrylic Marker Chính Hãng Deli THÊM 80% MỰC 12/24/36/48/64 Màu Tô Trên Mọi Chất Liệu</div>
+    <div>
+        <span class="price">7,000₫</span>
+        <span class="before">49,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="dây chuyền nữ titan eleanor accessories đính đá vòng cổ khắc số la mã phụ kiện trang sức 8505"
+       data-discount="86">
+    <div class="badge">-86%</div>
+    <a href="https://s.shopee.vn/9zqw8awm9f" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m41fhua140a8a3">
+    </a>
+    <div class="name">Dây chuyền nữ titan Eleanor Accessories đính đá vòng cổ khắc số la mã phụ kiện trang sức 8505</div>
+    <div>
+        <span class="price">35,000₫</span>
+        <span class="before">244,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[hỏa tốc] ổ cắm điện đa năng deli chịu tải 2500w có cổng usb, dây dài 3-5m có chốt an toàn"
+       data-discount="86">
+    <div class="badge">-86%</div>
+    <a href="https://s.shopee.vn/8V28Lq2UCO" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mg4s5tf51nv042">
+    </a>
+    <div class="name">[HỎA TỐC] Ổ Cắm Điện Đa Năng Deli Chịu Tải 2500W Có Cổng USB, Dây Dài 3-5m Có Chốt An Toàn</div>
+    <div>
+        <span class="price">17,500₫</span>
+        <span class="before">129,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="sữa rửa mặt nam 2 in 1 nguyên liệu nhập khẩu sirmen europe gentlemen 100g công nghệ tiên tiến"
+       data-discount="85">
+    <div class="badge">-85%</div>
+    <a href="https://s.shopee.vn/8Kii9X37XN" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mhu7e64gu8skd5">
+    </a>
+    <div class="name">Sữa rửa mặt nam 2 in 1 nguyên liệu nhập khẩu SIRMEN Europe Gentlemen 100g công nghệ tiên tiến</div>
+    <div>
+        <span class="price">40,000₫</span>
+        <span class="before">266,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="dây chuyền nữ titan eleanor accessories đính đá vòng cổ khắc số la mã phụ kiện trang sức 3468"
+       data-discount="85">
+    <div class="badge">-85%</div>
+    <a href="https://s.shopee.vn/9pXVwHxPUW" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lpulxmq9034i62">
+    </a>
+    <div class="name">Dây chuyền nữ titan Eleanor Accessories đính đá vòng cổ khắc số la mã phụ kiện trang sức 3468</div>
+    <div>
+        <span class="price">37,000₫</span>
+        <span class="before">244,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="dây chuyền nữ titan eleanor accessories hình vuông đính đá phụ kiện trang sức 6990"
+       data-discount="85">
+    <div class="badge">-85%</div>
+    <a href="https://s.shopee.vn/9fE5jyy2pV" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lp7rhca5ycez90">
+    </a>
+    <div class="name">Dây chuyền nữ titan Eleanor Accessories hình vuông đính đá phụ kiện trang sức 6990</div>
+    <div>
+        <span class="price">37,000₫</span>
+        <span class="before">250,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="áo dài cách tân nữ thiết kế cách điệu eva de eva 24aade011g"
+       data-discount="85">
+    <div class="badge">-85%</div>
+    <a href="https://s.shopee.vn/9UufXfygAU" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134201-7ras8-m1rx2v1rtf0z08">
+    </a>
+    <div class="name">Áo dài cách tân nữ thiết kế cách điệu Eva de Eva 24AADE011G</div>
+    <div>
+        <span class="price">524,850₫</span>
+        <span class="before">3,499,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="412ad1004 - bộ áo dài nữ lưới ren mây bồng bềnh adore dress"
+       data-discount="85">
+    <div class="badge">-85%</div>
+    <a href="https://s.shopee.vn/9KbFLMzJVT" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m5wf98qnv3g6b4">
+    </a>
+    <div class="name">412AD1004 - Bộ áo dài nữ lưới ren mây bồng bềnh ADORE DRESS</div>
+    <div>
+        <span class="price">299,000₫</span>
+        <span class="before">1,990,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="412ad1003 - bộ áo dài nữ lưới ren mây phần adore dress"
+       data-discount="85">
+    <div class="badge">-85%</div>
+    <a href="https://s.shopee.vn/AUnCjVus8i" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m5wemk8ws3sm73">
+    </a>
+    <div class="name">412AD1003 - Bộ áo dài nữ lưới ren mây phần ADORE DRESS</div>
+    <div>
+        <span class="price">299,000₫</span>
+        <span class="before">1,990,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="váy liền pickleball kamito tiamo"
+       data-discount="84">
+    <div class="badge">-84%</div>
+    <a href="https://s.shopee.vn/3fwsaxLMq9" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-me8lbyinbf2f45">
+    </a>
+    <div class="name">Váy liền Pickleball Kamito Tiamo</div>
+    <div>
+        <span class="price">99,000₫</span>
+        <span class="before">620,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="1 bướm trang trí móng tay mới hợp kim bạc nơ trang trí móng tay kim cương nhỏ trang trí móng tay"
+       data-discount="84">
+    <div class="badge">-84%</div>
+    <a href="https://s.shopee.vn/3VdSOeM0B8" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rfib-m9fbunsj326806">
+    </a>
+    <div class="name">1 Bướm Trang Trí Móng Tay Mới Hợp Kim Bạc Nơ Trang Trí Móng Tay Kim Cương Nhỏ Trang Trí Móng Tay</div>
+    <div>
+        <span class="price">3,520₫</span>
+        <span class="before">22,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[combo 5 10] vở kẻ ngang deli tập vở 72 120 200 trang học sinh sinh viên nhiều mẫu mã cute sổ quà tặng đồ dùng học tập"
+       data-discount="84">
+    <div class="badge">-84%</div>
+    <a href="https://s.shopee.vn/3LK2CLMdW7" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lw81qiyibmxlbd">
+    </a>
+    <div class="name">[COMBO 5 10] Vở Kẻ Ngang Deli Tập Vở 72 120 200 Trang Học Sinh Sinh Viên Nhiều Mẫu Mã Cute Sổ Quà Tặng Đồ Dùng Học Tập</div>
+    <div>
+        <span class="price">8,000₫</span>
+        <span class="before">50,400₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="dodder thanh lịch bạc bướm vòng tay nữ khắc vòng đeo tay thả đồ trang sức"
+       data-discount="84">
+    <div class="badge">-84%</div>
+    <a href="https://s.shopee.vn/3B0c02NGr6" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rcfa-ltvwjk2s76rr90">
+    </a>
+    <div class="name">Dodder Thanh Lịch Bạc Bướm Vòng Tay Nữ Khắc Vòng Đeo Tay Thả Đồ Trang Sức</div>
+    <div>
+        <span class="price">11,000₫</span>
+        <span class="before">69,367₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="bông tai nữ chuôi bạc 925 eleanor accessories đa dạng kiểu dáng phụ kiện trang sức khuyên tai 3660"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/30hBnjNuC5" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mg323e3k1899c6">
+    </a>
+    <div class="name">Bông tai nữ chuôi bạc 925 Eleanor Accessories đa dạng kiểu dáng phụ kiện trang sức khuyên tai 3660</div>
+    <div>
+        <span class="price">14,900₫</span>
+        <span class="before">90,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="camera wifi ip deli xoay 360 độ đàm thoại 2 chiều mắt nhìn hồng ngoại theo dõi phát hiện chuyển động"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/7V9bA06V10" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mhh63gfxp4hy13">
+    </a>
+    <div class="name">Camera WIFI IP DELI Xoay 360 Độ Đàm Thoại 2 Chiều Mắt Nhìn Hồng Ngoại Theo Dõi Phát Hiện Chuyển Động</div>
+    <div>
+        <span class="price">185,000₫</span>
+        <span class="before">1,109,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[tặng 3 bông lau] bộ cây lau nhà tách nước bẩn thông minh deli, chổi lau nhà xoay 360 độ 2 ngăn kèm bông lau"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/7KqAxh78Lz" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mejxexm5ttl10e">
+    </a>
+    <div class="name">[TẶNG 3 BÔNG LAU] Bộ Cây Lau Nhà Tách Nước Bẩn Thông Minh Deli, Chổi Lau Nhà Xoay 360 độ 2 Ngăn Kèm Bông Lau</div>
+    <div>
+        <span class="price">19,000₫</span>
+        <span class="before">109,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="quần bầu legging cạp chun chất liệu cotton hè thoáng mát, có dây kéo điều chỉnh thiết kế bởi lamme"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/7AWklO7lgy" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134201-7ra0g-maashpzrytm024">
+    </a>
+    <div class="name">Quần bầu Legging Cạp Chun chất liệu cotton hè thoáng mát, có dây kéo điều chỉnh thiết kế bởi LAMME</div>
+    <div>
+        <span class="price">49,000₫</span>
+        <span class="before">295,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="sữa tắm dorrikey loại bỏ ve rận, nấm, ngứa, viêm da, khử hôi, dưỡng mượt lông cho chó mèo 510ml - lna"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/70DKZ58P1x" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lqtkc28w7wlu6d">
+    </a>
+    <div class="name">Sữa tắm Dorrikey loại bỏ ve rận, nấm, ngứa, viêm da, khử hôi, dưỡng mượt lông cho chó mèo 510ml - Lna</div>
+    <div>
+        <span class="price">5,000₫</span>
+        <span class="before">30,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="rèm che nắng xe ô tô chống tia uv chắn nắng,nóng cho xe hơi hút nam châm theo chuẩn cho từng dòng xe hàng loại 1"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/6ptuMm92Mw" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m3kg2g0rkgiwb7">
+    </a>
+    <div class="name">Rèm che nắng xe ô tô chống tia uv chắn nắng,nóng cho xe hơi hút nam châm theo chuẩn cho từng dòng xe hàng loại 1</div>
+    <div>
+        <span class="price">87,000₫</span>
+        <span class="before">500,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[hàng sẵn - hỏa tốc 24h]  balo phi hành gia lna trong suốt cao cấp dành cho chó mèo"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/7pmRYc51YS" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-loiqfg0lmk1fe7">
+    </a>
+    <div class="name">[HÀNG SẴN - HỎA TỐC 24H]  Balo phi hành gia Lna trong suốt cao cấp dành cho chó mèo</div>
+    <div>
+        <span class="price">9,999₫</span>
+        <span class="before">60,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ổ cắm điện đa năng deli cổng type c usb sạc nhanh pd 20w 2-12 ổ vuông dẹt chịu tải 3250w cầu chì tự ngắt khi quá tải"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/7fT1MJ5etR" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lyrdswc0vcjx35">
+    </a>
+    <div class="name">Ổ Cắm Điện Đa Năng DELI Cổng Type C USB Sạc Nhanh PD 20W 2-12 Ổ Vuông Dẹt Chịu Tải 3250W Cầu Chì Tự Ngắt Khi Quá Tải</div>
+    <div>
+        <span class="price">25,000₫</span>
+        <span class="before">149,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ổ cắm điện đa năng deli ổ cắm vuông dẹt usb typec sạc nhanh pd20w cầu chì tự ngắt khi quá tải công suất 3250w an toàn"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/7V9bA06IEQ" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lyrds3ksy9wh3b">
+    </a>
+    <div class="name">Ổ Cắm Điện Đa Năng Deli Ổ Cắm Vuông Dẹt USB TypeC Sạc Nhanh PD20W Cầu Chì Tự Ngắt Khi Quá Tải Công Suất 3250W An Toàn</div>
+    <div>
+        <span class="price">25,000₫</span>
+        <span class="before">149,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="túi tote du lịch mia tote bag ii s white thiết kế độc quyền, đa năng tiện dụng - hàng cao cấp chính hãng"
+       data-discount="83">
+    <div class="badge">-83%</div>
+    <a href="https://s.shopee.vn/7KqAxh6vZP" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-23010-g9w7m26ql8lvb5">
+    </a>
+    <div class="name">Túi Tote du lịch Mia Tote bag II S White thiết kế độc quyền, đa năng tiện dụng - Hàng cao cấp chính hãng</div>
+    <div>
+        <span class="price">33,000₫</span>
+        <span class="before">199,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="kính cường lực iphone ktmstore kk ip full màn 6plus/7plus/8/8plus/x/xs/xs max/12 pro/11 12 13 14 15 16 promax 17promax"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/5q1NAwCdc8" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-md8iea5njz3092">
+    </a>
+    <div class="name">Kính cường lực iphone KTMStore KK ip Full Màn 6plus/7plus/8/8plus/x/xs/xs max/12 pro/11 12 13 14 15 16 promax 17PROMAX</div>
+    <div>
+        <span class="price">9,000₫</span>
+        <span class="before">49,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="bông tai nữ chuôi bạc 925 eleanor accessories ngọc trai nhân tạo phụ kiện trang sức khuyên tai 9037"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/8V28Lq1O0H" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m3aiu3slcwcc41">
+    </a>
+    <div class="name">Bông tai nữ chuôi bạc 925 Eleanor Accessories ngọc trai nhân tạo phụ kiện trang sức khuyên tai 9037</div>
+    <div>
+        <span class="price">15,900₫</span>
+        <span class="before">90,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="sữa tắm gội nam rockman hương nước hoa 3in1 tiện lợi, khử sạch mùi hôi, quà tặng bạn trai - 400ml"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/805rkv3I1C" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lusqtuijaecl9f">
+    </a>
+    <div class="name">Sữa tắm gội nam ROCKMAN hương nước hoa 3in1 tiện lợi, khử sạch mùi hôi, quà tặng bạn trai - 400ml</div>
+    <div>
+        <span class="price">115,000₫</span>
+        <span class="before">640,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="dây chuyền nữ titan eleanor accessories hình giọt nước vòng cổ basic phụ kiện trang sức 0010"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/8APHxE2egF" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lqn14lb8oqmqda">
+    </a>
+    <div class="name">Dây chuyền nữ titan Eleanor Accessories hình giọt nước vòng cổ basic phụ kiện trang sức 0010</div>
+    <div>
+        <span class="price">37,000₫</span>
+        <span class="before">206,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="dây chuyền nữ eleanor accessories đa dạng kiểu dáng phụ kiện trang sức vòng cổ thời trang 3893"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/8zyOwkzTzQ" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lrwvdx2fnue14a">
+    </a>
+    <div class="name">Dây chuyền nữ Eleanor Accessories đa dạng kiểu dáng phụ kiện trang sức vòng cổ thời trang 3893</div>
+    <div>
+        <span class="price">25,000₫</span>
+        <span class="before">140,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="giày thể thao cổ ngắn nữ fitflop f-mode - urban white mix - fl15 - gk5-646"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/9AHp93yqeT" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-81zvd-midz1o2dm6mb7d">
+    </a>
+    <div class="name">Giày Thể Thao Cổ Ngắn Nữ FitFlop F-MODE - Urban White Mix - FL15 - GK5-646</div>
+    <div>
+        <span class="price">726,800₫</span>
+        <span class="before">3,990,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="giày thể thao cổ ngắn nữ fitflop f-mode - urban white - fl13 - fr1-194"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/LgQcpY7s9" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-81ztj-midz19i77f9f72">
+    </a>
+    <div class="name">Giày Thể Thao Cổ Ngắn Nữ FitFlop F-MODE - Urban White - FL13 - FR1-194</div>
+    <div>
+        <span class="price">818,800₫</span>
+        <span class="before">4,490,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="bqn72688 - quần short công sở vải dạ dáng suông phối túi đính khuy tạo kiểu khóa thân sau - pantio"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/BN0QWYlD8" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134201-7ra0g-ma3y8y7wo9ri3d">
+    </a>
+    <div class="name">BQN72688 - Quần short công sở vải dạ dáng suông phối túi đính khuy tạo kiểu khóa thân sau - PANTIO</div>
+    <div>
+        <span class="price">199,000₫</span>
+        <span class="before">1,088,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ví nữ mini đựng tiền cnt mk03 xinh xắn"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/13aEDZOY7" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-ly07xet2bb2x0d">
+    </a>
+    <div class="name">Ví nữ mini đựng tiền CNT MK03 xinh xắn</div>
+    <div>
+        <span class="price">12,000₫</span>
+        <span class="before">65,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="tất nam guzado kháng khuẩn,khử mùi chống thối gtn01"
+       data-discount="82">
+    <div class="badge">-82%</div>
+    <a href="https://s.shopee.vn/1BFXcMUxBM" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-ls6w7g786nix32">
+    </a>
+    <div class="name">Tất nam Guzado Kháng Khuẩn,Khử Mùi Chống Thối GTN01</div>
+    <div>
+        <span class="price">14,400₫</span>
+        <span class="before">80,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="bông tai nữ chuôi bạc 925 eleanor accessories viền xoắn đính đá phụ kiện trang sức khuyên tai 2992"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/10w7Q3VaWL" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lqn5wbe1vx2ved">
+    </a>
+    <div class="name">Bông tai nữ chuôi bạc 925 Eleanor Accessories viền xoắn đính đá phụ kiện trang sức khuyên tai 2992</div>
+    <div>
+        <span class="price">25,000₫</span>
+        <span class="before">134,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="bọt vệ sinh nam giới c-horse dung dịch vệ sinh nam gel ddvs phái mạnh thiên nhiên thơm mát dạng bọt"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/1LYxofUJqF" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lyknsgl0dfa9c1">
+    </a>
+    <div class="name">Bọt vệ sinh nam giới C-HORSE dung dịch vệ sinh nam gel ddvs phái mạnh thiên nhiên thơm mát dạng bọt</div>
+    <div>
+        <span class="price">24,500₫</span>
+        <span class="before">129,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[thùng rác 49k] thùng rác treo tủ bếp 9l thông minh deli - thùng rác dán tường tặng móc treo có nắp kín, chịu lực 5kg"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/2VkvCoPsTU" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mghgvuj5s7wtdc">
+    </a>
+    <div class="name">[THÙNG RÁC 49K] Thùng Rác Treo Tủ Bếp 9L Thông Minh Deli - Thùng Rác Dán Tường tặng Móc Treo Có Nắp Kín, Chịu Lực 5KG</div>
+    <div>
+        <span class="price">19,000₫</span>
+        <span class="before">100,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="tinh dầu tràm huế nguyên chất dùng thử 3ml - hoa nén - an toàn cho mẹ và bé, giữ ấm, tắm bé"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/2LRV0VQVoT" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mdptnmot7elt5a">
+    </a>
+    <div class="name">Tinh dầu Tràm Huế nguyên chất dùng thử 3ml - Hoa Nén - An toàn cho mẹ và bé, giữ ấm, tắm bé</div>
+    <div>
+        <span class="price">7,315₫</span>
+        <span class="before">38,500₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="đồ chơi gỗ cho bé hagykidhn bảng ghép hình núm gỗ thông minh loại dày to đẹp 20x30cm nhiều chủ đề"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/2B84oCR99S" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-londf2cjiyq836">
+    </a>
+    <div class="name">Đồ Chơi Gỗ Cho Bé HagykidHN Bảng Ghép Hình Núm Gỗ Thông Minh Loại Dày To Đẹp 20x30cm Nhiều Chủ Đề</div>
+    <div>
+        <span class="price">7,000₫</span>
+        <span class="before">36,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="quần short errorist màu xám nhạt/ xám đậm/ sọc xanh"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/20oebtRmUR" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lvu2nq7yt68p70">
+    </a>
+    <div class="name">Quần Short ERRORIST màu xám nhạt/ xám đậm/ sọc xanh</div>
+    <div>
+        <span class="price">45,980₫</span>
+        <span class="before">242,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[tặng 800 ghim] súng bắn ghim kìm bắn đinh ghim deli tools cầm tay mới trợ lực đa năng, tiện dụng"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/3qGInGKs1o" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mbrm3zxho9lac1">
+    </a>
+    <div class="name">[Tặng 800 ghim] Súng bắn ghim Kìm bắn đinh ghim DELI TOOLS cầm tay mới trợ lực đa năng, tiện dụng</div>
+    <div>
+        <span class="price">19,000₫</span>
+        <span class="before">100,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="giày thể thao cổ ngắn nữ fitflop rally - urban white/wild lilac - fl10 - dq3-b22"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/3fwsaxLVMn" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-81zv0-midz1fjzklc394">
+    </a>
+    <div class="name">Giày Thể Thao Cổ Ngắn Nữ FitFlop RALLY - Urban White/Wild Lilac - FL10 - DQ3-B22</div>
+    <div>
+        <span class="price">634,800₫</span>
+        <span class="before">3,390,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="errorist khăn quàng cổ"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/3VdSOeM8hm" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lqnlc5clm6s263">
+    </a>
+    <div class="name">ERRORIST khăn quàng cổ</div>
+    <div>
+        <span class="price">22,800₫</span>
+        <span class="before">120,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="set 8 nhẫn đeo tay kim loại đính đá đen / bạc thời trang cho nữ"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/3LK2CLMm2l" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/75a822cbd946a8d3e4e7830212d57cc9">
+    </a>
+    <div class="name">Set 8 Nhẫn Đeo Tay Kim Loại Đính Đá Đen / Bạc Thời Trang Cho Nữ</div>
+    <div>
+        <span class="price">9,462₫</span>
+        <span class="before">49,972₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="sách: basic words - hơn 150 từ và cụm từ thường ngày"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/3B0c02NPNk" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m69nozhrw8ja50">
+    </a>
+    <div class="name">Sách: Basic Words - Hơn 150 Từ và Cụm Từ Thường Ngày</div>
+    <div>
+        <span class="price">22,800₫</span>
+        <span class="before">120,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[combo deal hời] ô cắm điện deli công suất lớn 3250w ổ điện đa năng chịu tải cao sạc usb tiết diện dây đồng lớn"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/8APHxE4Iyw" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m9l6ahopwu9w26">
+    </a>
+    <div class="name">[COMBO DEAL HỜI] Ô Cắm Điện DELI Công Suất Lớn 3250W Ổ Điện Đa Năng Chịu Tải Cao Sạc USB Tiết Diện Dây Đồng Lớn</div>
+    <div>
+        <span class="price">25,000₫</span>
+        <span class="before">129,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ổ cắm điện đa năng deli - cầu chì tự ngắt an toàn chống giật - bảo hành 36 tháng 1 đổi 1"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/805rkv4wJv" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lyrdtwrvjmapf1">
+    </a>
+    <div class="name">Ổ Cắm Điện Đa Năng DELI - Cầu Chì Tự Ngắt An Toàn Chống Giật - Bảo Hành 36 Tháng 1 Đổi 1</div>
+    <div>
+        <span class="price">25,000₫</span>
+        <span class="before">129,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ổ cắm điện đa năng deli cổng type c usb sạc nhanh pd 20w 2-12 ổ vuông dẹt chịu tải 2500w cầu chì tự ngắt khi quá tải"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/9AHp940UxA" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m4pjo2g95mmned">
+    </a>
+    <div class="name">Ổ Cắm Điện Đa Năng DELI Cổng Type C USB Sạc Nhanh PD 20W 2-12 Ổ Vuông Dẹt Chịu Tải 2500W Cầu Chì Tự Ngắt Khi Quá Tải</div>
+    <div>
+        <span class="price">25,000₫</span>
+        <span class="before">129,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ổ cắm điện deli nhiều lỗ cắm (4-8 lỗ) chiều dài dây 2m/3m/5m nút bảo vệ quá áp công suất 2500w"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/8zyOwl18I9" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-maxl5eeqki54ef">
+    </a>
+    <div class="name">Ổ Cắm Điện DELI Nhiều Lỗ Cắm (4-8 Lỗ) Chiều Dài Dây 2m/3m/5m Nút Bảo Vệ Quá Áp Công Suất 2500W</div>
+    <div>
+        <span class="price">25,000₫</span>
+        <span class="before">129,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ổ điện đa năng deli tích hợp 4 lỗ cắm đầu hai - tiện dụng, an toàn - dùng trong văn phòng - dây dài 2m/3m/5m - e18340"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/8peykS1ld8" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lyrdvc4celot3a">
+    </a>
+    <div class="name">Ổ Điện Đa Năng Deli Tích Hợp 4 Lỗ Cắm Đầu Hai - Tiện Dụng, An Toàn - Dùng Trong Văn Phòng - Dây Dài 2m/3m/5m - E18340</div>
+    <div>
+        <span class="price">25,000₫</span>
+        <span class="before">129,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="xịt kháng khuẩn, khử trùng, khử mùi, ngừa ẩm mốc công nghệ nano bạc ecodeals - tinh dầu cam sả"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/8V28Lq2lGj" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-ma5voagdcmg8fa">
+    </a>
+    <div class="name">Xịt Kháng khuẩn, khử trùng, khử mùi, ngừa ẩm mốc công nghệ Nano Bạc ECODEALS - Tinh dầu Cam Sả</div>
+    <div>
+        <span class="price">10,450₫</span>
+        <span class="before">55,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="túi dây rút mini để điện thoại, củ sạc ugreen 15108 | đựng đa dạng thiết bị | bền bỉ"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/805rkv4fHe" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lydivk17uukt7c">
+    </a>
+    <div class="name">Túi dây rút Mini để điện thoại, củ sạc Ugreen 15108 | Đựng đa dạng thiết bị | Bền bỉ</div>
+    <div>
+        <span class="price">19,000₫</span>
+        <span class="before">100,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="túi tote quà tặng paradox qt4p1192 qt4p1193"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/8APHxE41wh" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134201-7ra0g-m9u27fc6w5l055">
+    </a>
+    <div class="name">Túi tote quà tặng PARADOX QT4P1192 QT4P1193</div>
+    <div>
+        <span class="price">19,000₫</span>
+        <span class="before">100,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="✨vòng tay hàn quốc trái tim bướm nữ pha lê nơ ngôi sao mặt trăng hạt vòng tay phụ kiện thời trang trang trang sức quà tặng✨"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/8zyOwl0rFs" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rdxz-lydmu37qzsq0f5">
+    </a>
+    <div class="name">✨Vòng Tay Hàn Quốc Trái Tim Bướm Nữ Pha Lê Nơ Ngôi Sao Mặt Trăng Hạt Vòng Tay Phụ Kiện Thời Trang Trang Trang Sức Quà Tặng✨</div>
+    <div>
+        <span class="price">6,490₫</span>
+        <span class="before">33,943₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="dép quai ngang nam nữ the bad god basicx01 chữ đen đế pvc chống trơn local brand unisex"
+       data-discount="81">
+    <div class="badge">-81%</div>
+    <a href="https://s.shopee.vn/9AHp940Duv" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m659o6vayedz47">
+    </a>
+    <div class="name">Dép Quai Ngang Nam Nữ The Bad God BasicX01 Chữ Đen Đế PVC Chống Trơn Local Brand Unisex</div>
+    <div>
+        <span class="price">55,861₫</span>
+        <span class="before">300,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="aó ba lỗ nam grayhomme (8 màu) dáng thể thao, siêu mát, thấm hút mồ hôi, co giãn tốt - ttkg001"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/4At9BsJSqV" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-ljwgun5rp4hu1b">
+    </a>
+    <div class="name">Aó Ba Lỗ Nam GRAYHOMME (8 Màu) Dáng Thể Thao, Siêu Mát, Thấm Hút Mồ Hôi, Co giãn Tốt - TTKG001</div>
+    <div>
+        <span class="price">39,800₫</span>
+        <span class="before">199,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="bộ quần áo nam aviano có cổ cộc tay, bộ thể thao nam phối sọc thời trang chất liệu poly coolmax thoáng khí"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/10w7Q3VWGu" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/1321e4225384499ab4269f108633db4d">
+    </a>
+    <div class="name">Bộ Quần Áo Nam AVIANO Có Cổ Cộc Tay, Bộ Thể Thao Nam Phối Sọc Thời Trang Chất Liệu Poly Coolmax Thoáng Khí</div>
+    <div>
+        <span class="price">109,000₫</span>
+        <span class="before">538,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="bông tai nữ chuôi bạc 925 eleanor accessories ngọc trai nhân tạo phụ kiện trang sức khuyên tai 7085"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/1BFXcMUsvx" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lp7ffqa9j2a6d5">
+    </a>
+    <div class="name">Bông tai nữ chuôi bạc 925 Eleanor Accessories ngọc trai nhân tạo phụ kiện trang sức khuyên tai 7085</div>
+    <div>
+        <span class="price">49,000₫</span>
+        <span class="before">250,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="hôp 6 gôm tẩy siêu sạch deli nusign cao cấp tẩy mềm ít vụn không mùi không mòn rách giấy tiện lợi cho học sinh"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/gJH1RWmws" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rfhy-m30emzfoq5if02">
+    </a>
+    <div class="name">Hôp 6 Gôm Tẩy Siêu Sạch Deli Nusign Cao Cấp Tẩy Mềm Ít Vụn Không Mùi Không Mòn Rách Giấy Tiện Lợi Cho Học Sinh</div>
+    <div>
+        <span class="price">3,000₫</span>
+        <span class="before">15,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="chân váy nữ canifa dáng chữ a họa tiết kẻ 6ks23c005"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/qchDkW9bv" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-81zwq-milip1mew1zbec">
+    </a>
+    <div class="name">Chân váy nữ CANIFA dáng chữ A họa tiết kẻ 6KS23C005</div>
+    <div>
+        <span class="price">99,000₫</span>
+        <span class="before">499,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="413sk2057 - chân váy midi xẻ trước thun tăm đen/đỏ đô /tím pastel adore dress"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/1LYxofSbIU" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m3xn9sl4cowx40">
+    </a>
+    <div class="name">413SK2057 - Chân váy midi xẻ trước thun tăm đen/đỏ đô /tím pastel ADORE DRESS</div>
+    <div>
+        <span class="price">99,000₫</span>
+        <span class="before">499,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="bộ thể thao nam aviano có cổ, bộ quần áo nam mùa hè chi tiết phối sọc thời trang, chất liệu co giãn, thấm hút mồ hôi"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/1VsO0yRxxX" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lk7lsxgzt22cea">
+    </a>
+    <div class="name">Bộ Thể Thao Nam AVIANO Có Cổ, Bộ Quần Áo Nam Mùa Hè Chi Tiết Phối Sọc Thời Trang, Chất Liệu Co Giãn, Thấm Hút Mồ Hôi</div>
+    <div>
+        <span class="price">109,000₫</span>
+        <span class="before">538,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="[có video][bh 1năm] cân tiểu ly điện tử 5.0kg zodan c105 - chính xác từng gam, chính hãng bh 1 năm"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/9AHp93ymP2" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lt3xi6yz0gxw1a">
+    </a>
+    <div class="name">[CÓ VIDEO][BH 1NĂM] Cân tiểu ly điện tử 5.0Kg ZODAN C105 - chính xác từng gam, chính hãng BH 1 Năm</div>
+    <div>
+        <span class="price">48,998₫</span>
+        <span class="before">250,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="cút nối nhanh máy lọc nước nano geyser"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/8zyOwkzPk1" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/67e91722ec607c5c0055789de0a0c859">
+    </a>
+    <div class="name">Cút nối nhanh máy lọc nước Nano Geyser</div>
+    <div>
+        <span class="price">4,900₫</span>
+        <span class="before">24,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="jumpsuit nữ heradg dáng ngắn thiết kế cổ vest, rút eo giúp tôn vóc dáng sjsbb2006"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/8peykS0350" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-822zo-mibc3atqat5329">
+    </a>
+    <div class="name">Jumpsuit nữ HeraDG dáng ngắn thiết kế cổ vest, rút eo giúp tôn vóc dáng SJSBB2006</div>
+    <div>
+        <span class="price">177,800₫</span>
+        <span class="before">889,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="quần lót nam aviano cotton compact co giãn 4 chiều, quần sịp nam boxer thoáng khí"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/4q8pz6GrDK" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lkg42t2gsl2439">
+    </a>
+    <div class="name">Quần Lót Nam AVIANO Cotton Compact Co Giãn 4 Chiều, Quần Sịp Nam Boxer Thoáng Khí</div>
+    <div>
+        <span class="price">20,000₫</span>
+        <span class="before">99,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="thanh treo đa năng thông minh emomart e03, lắp đặt không cần khoan bắt vít, inox 304 chống rỉ"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/4fpPmnHUYJ" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-ljb7jttpwi6k69">
+    </a>
+    <div class="name">Thanh Treo Đa Năng Thông Minh EMOMART E03, Lắp đặt không cần khoan bắt vít, Inox 304 chống rỉ</div>
+    <div>
+        <span class="price">9,500₫</span>
+        <span class="before">47,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="giày thể thao cổ ngắn nữ fitflop rally - urban white - fl12 - hf7-194"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/Vzqp8XM0W" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-81zv1-midz1onrzv9cb4">
+    </a>
+    <div class="name">Giày Thể Thao Cổ Ngắn Nữ FitFlop RALLY - Urban White - FL12 - HF7-194</div>
+    <div>
+        <span class="price">634,800₫</span>
+        <span class="before">3,190,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="giấy ăn 4 lớp 8d lụa bồng bềnh teddy bear essential softness, khăn giấy rút lụa trắng,dai dày mềm mịn"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/LgQcpXzLV" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rdy1-m0v4g3n10n42ac">
+    </a>
+    <div class="name">Giấy Ăn 4 Lớp 8D Lụa Bồng Bềnh TEDDY BEAR Essential Softness, Khăn Giấy Rút Lụa Trắng,Dai Dày Mềm Mịn</div>
+    <div>
+        <span class="price">19,900₫</span>
+        <span class="before">99,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="ghim cài quần bị rộng aaa ilita bóp eo điều chỉnh lưng quần áo jean phong cách hàn quốc"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/BN0QWYcgU" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-ly8wuefi6ly93d">
+    </a>
+    <div class="name">Ghim cài quần bị rộng AAA iLita bóp eo điều chỉnh lưng quần áo jean phong cách Hàn Quốc</div>
+    <div>
+        <span class="price">7,491₫</span>
+        <span class="before">38,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="túi chiết mỹ phẩm du lịch welike chiết sữa tắm dầu gội 100ml 50ml 30ml tiện lợi trong suốt có nắp nhựa sử dụng nhiều lần"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/Vzqp8bxZY" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m3ypri8yq640cc">
+    </a>
+    <div class="name">Túi chiết mỹ phẩm du lịch Welike chiết sữa tắm dầu gội 100ml 50ml 30ml tiện lợi trong suốt có nắp nhựa sử dụng nhiều lần</div>
+    <div>
+        <span class="price">8,000₫</span>
+        <span class="before">40,000₫</span>
+    </div>
+  </div>
+
+
+  <div class="card"
+       data-name="áo thun cho bé labubu áo cho bé unisex bé trai bé gái áo cotton loại một siêu mát thấm hút mồ hôi babi mama abg06"
+       data-discount="80">
+    <div class="badge">-80%</div>
+    <a href="https://s.shopee.vn/LgQcpcauX" target="_blank">
+      <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxe9z4lxqeorc7">
+    </a>
+    <div class="name">Áo Thun Cho Bé LABUBU Áo Cho Bé Unisex Bé Trai Bé Gái Áo Cotton Loại Một Siêu Mát Thấm Hút Mồ Hôi Babi mama ABG06</div>
+    <div>
+        <span class="price">57,820₫</span>
+        <span class="before">290,000₫</span>
+    </div>
+  </div>
+
+
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+<script>
+const btn = document.getElementById("toTop");
+window.addEventListener("scroll", () => {
+  btn.style.display = window.scrollY > 400 ? "block" : "none";
+});
+</script>
+<script>
+const input = document.querySelector("input[name='q']");
+const cards = document.querySelectorAll(".card");
+
+function applyFilter() {
+  const keyword = input.value.trim().toLowerCase();
+  const minDiscount = Number(discountSelect.value);
+
+  cards.forEach(card => {
+    const name = card.dataset.name || "";
+    const discount = Number(card.dataset.discount || 0);
+
+    const okName = name.includes(keyword);
+    const okDiscount = discount >= minDiscount;
+
+    card.style.display = (okName && okDiscount) ? "" : "none";
+  });
+}
+
+input.addEventListener("input", applyFilter);
+applyFilter();
+</script>
+<script>
+function onDiscountChange(val){
+  if(val === "0"){
+    window.location.href = "index.html";
+  } else {
+    window.location.href = "discount_" + val + ".html";
+  }
+}
+</script>
+
+</body>
+</html>
