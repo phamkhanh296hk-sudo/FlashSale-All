@@ -362,13 +362,27 @@ function renderNextBatch() {
   const html = slice.map(it => `
     <div class="card">
       ${it.discount ? `<div class="badge">-${it.discount}%</div>` : ""}
+
       <a href="${it.productUrl}" target="_blank">
         <img src="${it.imageUrl}" loading="lazy">
       </a>
+
       <div class="name">${it.name}</div>
+
+      <div>
+        <span class="price">
+          ${(it.price / 100000).toLocaleString()}₫
+        </span>
+        ${
+          it.price_before_discount
+            ? `<span class="before">
+                 ${(it.price_before_discount / 100000).toLocaleString()}₫
+               </span>`
+            : ""
+        }
+      </div>
     </div>
   `).join("");
-
   grid.insertAdjacentHTML("beforeend", html);
 }
 
