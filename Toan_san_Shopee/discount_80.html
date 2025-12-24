@@ -401,6 +401,15 @@ searchInput.addEventListener("input", () => {
   renderNextBatch();
 });
 </script>
+<script>
+function onDiscountChange(val){
+  if(val === "0"){
+    window.location.href = "index.html";
+  } else {
+    window.location.href = "discount_" + val + ".html";
+  }
+}
+</script>
 
 </body>
 </html>
