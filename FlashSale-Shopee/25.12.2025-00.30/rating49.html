@@ -373,7 +373,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766584040`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766584251`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
@@ -413,10 +413,15 @@ window.addEventListener("scroll", () => {
 
 })();
 </script>
+
 <script>
 /* ========= ELEMENT ========= */
 const grid  = document.getElementById("grid");
 const searchInput = document.querySelector("input[name='q']");
+
+/* ========= URL STATE ========= */
+const urlParams = new URLSearchParams(location.search);
+const qFromUrl = (urlParams.get("q") || "").toLowerCase();
 
 /* ========= CONFIG ========= */
 const BATCH_SIZE = 40;
@@ -424,15 +429,8 @@ let cursor = 0;
 
 /* ========= DATA ========= */
 let baseItems = ITEMS;
+let filteredItems = [];
 
-let filteredItems = qFromUrl
-  ? baseItems.filter(it =>
-      it.name.toLowerCase().includes(qFromUrl.toLowerCase())
-    )
-  : baseItems;
-grid.innerHTML = "";
-cursor = 0;
-renderNextBatch();
 /* ========= RENDER ========= */
 function renderNextBatch() {
   if (cursor >= filteredItems.length) return;
@@ -441,7 +439,7 @@ function renderNextBatch() {
   cursor += BATCH_SIZE;
 
   const html = slice.map(it => `
-    <div class="card" data-name="${it.name.toLowerCase()}">
+    <div class="card">
       ${it.discount ? `<div class="badge">-${it.discount}%</div>` : ""}
       ${it.is_mall ? `<div class="shop-badge mall">Mall</div>` : ""}
       ${it.is_preferred_plus ? `<div class="shop-badge preferred-plus">Yêu thích +</div>` : ""}
@@ -467,7 +465,15 @@ function renderNextBatch() {
   grid.insertAdjacentHTML("beforeend", html);
 }
 
-/* ========= INIT ========= */
+/* ========= INIT FILTER ========= */
+filteredItems = qFromUrl
+  ? baseItems.filter(it =>
+      it.name.toLowerCase().includes(qFromUrl)
+    )
+  : baseItems;
+
+grid.innerHTML = "";
+cursor = 0;
 renderNextBatch();
 
 /* ========= SEARCH ========= */
@@ -494,6 +500,7 @@ new IntersectionObserver(entries => {
   }
 }, { rootMargin: "400px" }).observe(sentinel);
 </script>
+
 
 </body>
 </html>
