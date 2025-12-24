@@ -373,7 +373,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766584251`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766587604`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
@@ -456,7 +456,7 @@ function renderNextBatch() {
       </div>
 
       <div class="meta">
-        <div>Kho ${it.stock}</div>
+        <div>📦 Kho ${it.stock}</div>
         <div>⭐ ${it.rating}/5 (${it.rating_count} đánh giá)</div>
       </div>
     </div>
