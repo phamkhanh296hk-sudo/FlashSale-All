@@ -8,55 +8,110 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box}
+
 body{
   margin:0;
   min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#f5f5f5;
+  background:#f5f7fa;
   font-family:"Manrope",sans-serif;
+  display:flex;
+  justify-content:center;
 }
 
+.wrapper{
+  width:100%;
+  max-width:1000px;
+  padding:20px;
+}
+
+/* ===== Banner ===== */
+.banner{
+  background:linear-gradient(135deg,#d9f3ff,#eefaff);
+  border-radius:20px;
+  padding:30px 25px;
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.banner h1{
+  margin:0 0 15px;
+  font-size:36px;
+  font-weight:800;
+}
+
+.flash-note{
+  font-size:16px;
+  line-height:1.6;
+}
+
+.flash-note a{
+  color:#0077cc;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.flash-note a:hover{
+  text-decoration:underline;
+}
+
+/* ===== Cards ===== */
 .container{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:40px;
+  gap:30px;
 }
 
 .card{
   background:#fff;
-  border-radius:24px;
-  padding:60px 50px;
+  border-radius:22px;
+  padding:40px 25px;
   text-align:center;
   text-decoration:none;
-  color:#111;
-  font-size:36px;
+  font-size:24px;
   font-weight:800;
-  box-shadow:0 20px 50px rgba(0,0,0,.15);
+  box-shadow:0 15px 40px rgba(0,0,0,.12);
   transition:.25s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
 }
 
 .card:hover{
   transform:scale(1.05);
 }
 
-.shopee{
-  color:#ee4d2d;
+.shopee{color:#ee4d2d}
+.lazada{color:#1e71ff}
+
+/* Logo */
+.logo{
+  width:26px;
+  height:auto;
 }
 
-.lazada{
-  color:#1e71ff;
-}
-
+/* ===== Mobile ===== */
 @media(max-width:768px){
-  .container{
-    grid-template-columns:1fr;
-    gap:30px;
+  .banner h1{
+    font-size:28px;
   }
+
+  .flash-note{
+    font-size:14px;
+  }
+
+  .container{
+    gap:18px;
+  }
+
   .card{
-    font-size:42px;
-    padding:70px 40px;
+    font-size:20px;
+    padding:28px 18px;
+  }
+
+  .logo{
+    width:22px;
   }
 }
 </style>
@@ -64,16 +119,53 @@ body{
 
 <body>
 
-<div class="container">
-  <a class="card shopee" href="FlashSale-Shopee/">
-    ⚡ FlashSale Shopee
-  </a>
-  <a class="card shopee" href="Toan_san_Shopee/">
-    🛒 Toàn sàn Shopee
-  </a>
-  <a class="card lazada" href="FlashSale-Lazada/">
-    ⚡ FlashSale Lazada
-  </a>
+<div class="wrapper">
+
+  <!-- Banner -->
+  <div class="banner">
+    <h1>⚡ DEAL HOT ĐÂY</h1>
+    <div class="flash-note">
+      ⚡ <strong>DEAL SHOPEE & LAZADA ĐƯỢC CẬP NHẬT LIÊN TỤC</strong><br>
+      👉 Tham gia ngay để không bỏ lỡ các deal hot:<br>
+      <a href="https://t.me/dealhotday" target="_blank">
+        https://t.me/dealhotday
+      </a>
+    </div>
+  </div>
+
+  <!-- Menu -->
+  <div class="container">
+
+    <a class="card shopee" href="FlashSale-Shopee/">
+      ⚡ FlashSale Shopee
+      <img class="logo"
+        src="https://cf.shopee.vn/file/vn-11134258-820l4-mesa9g3ee4g214_xhdpi"
+        alt="Shopee">
+    </a>
+
+    <a class="card shopee" href="Toan_san_Shopee/">
+      🛒 Toàn sàn Shopee
+      <img class="logo"
+        src="https://cf.shopee.vn/file/vn-11134258-820l4-mesa9g3ee4g214_xhdpi"
+        alt="Shopee">
+    </a>
+
+    <a class="card lazada" href="FlashSale-Lazada/">
+      ⚡ FlashSale Lazada
+      <img class="logo"
+        src="https://img.lazcdn.com/us/domino/a96c58a6a88070c43bc63444f6774f51.png"
+        alt="Lazada">
+    </a>
+
+    <a class="card lazada" href="Toan_san_Lazada/">
+      🛒 Toàn sàn Lazada
+      <img class="logo"
+        src="https://img.lazcdn.com/us/domino/a96c58a6a88070c43bc63444f6774f51.png"
+        alt="Lazada">
+    </a>
+
+  </div>
+
 </div>
 
 </body>
