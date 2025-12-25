@@ -45,37 +45,21 @@ body{
   line-height:1.6;
 }
 
-.flash-note a{
-  color:#0077cc;
-  text-decoration:none;
-  font-weight:700;
-}
-
-.flash-note a:hover{
-  text-decoration:underline;
-}
-
 /* ===== Cards ===== */
 .container{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:30px;
+  gap:26px;
 }
 
 .card{
   background:#fff;
   border-radius:22px;
-  padding:40px 25px;
-  text-align:center;
+  padding:24px 20px;
   text-decoration:none;
-  font-size:24px;
-  font-weight:800;
   box-shadow:0 15px 40px rgba(0,0,0,.12);
   transition:.25s;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
+  position:relative;
 }
 
 .card:hover{
@@ -85,40 +69,46 @@ body{
 .shopee{color:#ee4d2d}
 .lazada{color:#1e71ff}
 
+/* Card layout */
+.card-inner{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+}
+
+.left{
+  text-align:center;
+}
+
+.icon{
+  font-size:26px;
+  line-height:1;
+}
+
+.text{
+  font-size:22px;
+  font-weight:800;
+  line-height:1.2;
+  margin-top:6px;
+}
+
 /* Logo */
 .logo{
-  width:26px;
-  height:auto;
+  width:28px;
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
 }
+
 
 /* ===== Mobile ===== */
 @media(max-width:768px){
-  .banner h1{
-    font-size:28px;
-  }
-
-  .flash-note{
-    font-size:14px;
-  }
-
-  .container{
-    gap:18px;
-  }
-
-  .card{
+  .text{
     font-size:20px;
-    padding:28px 18px;
   }
-
   .logo{
-    width:22px;
-  }
-  .label{
-    white-space:nowrap;
-  }
-
-  .card{
-    flex-wrap:nowrap;
+    width:24px;
   }
 }
 </style>
@@ -141,37 +131,53 @@ body{
   </div>
 
   <!-- Menu -->
-	<div class="container">
+  <div class="container">
 
-	  <a class="card shopee" href="/FlashSale-Shopee/">
-	    <span class="label">⚡ FlashSale Shopee</span>
-	    <img class="logo"
-	      src="https://cdn.coccoc.com/browser_images/mostvisited/1661854489-shopee.svg"
-	      alt="Shopee">
-	  </a>
+    <!-- FlashSale Shopee -->
+    <a class="card shopee" href="/FlashSale-Shopee/">
+      <div class="card-inner">
+        <div class="left">
+          <div class="icon">⚡</div>
+          <div class="text">FlashSale<br>Shopee</div>
+        </div>
+        <img class="logo" src="https://cdn.coccoc.com/browser_images/mostvisited/1661854489-shopee.svg">
+      </div>
+    </a>
 
-	  <a class="card shopee" href="/Toan_san_Shopee/">
-	    <span class="label">🛒 Toàn sàn Shopee</span>
-	    <img class="logo"
-	      src="https://cdn.coccoc.com/browser_images/mostvisited/1661854489-shopee.svg"
-	      alt="Shopee">
-	  </a>
+    <!-- Toàn sàn Shopee -->
+    <a class="card shopee" href="/Toan_san_Shopee/">
+      <div class="card-inner">
+        <div class="left">
+          <div class="icon">🛒</div>
+          <div class="text">Toàn sàn<br>Shopee</div>
+        </div>
+        <img class="logo" src="https://cdn.coccoc.com/browser_images/mostvisited/1661854489-shopee.svg">
+      </div>
+    </a>
 
-	  <a class="card lazada" href="/FlashSale-Lazada/">
-	    <span class="label">⚡ FlashSale Lazada</span>
-	    <img class="logo"
-	      src="https://img.lazcdn.com/us/domino/a96c58a6a88070c43bc63444f6774f51.png"
-	      alt="Lazada">
-	  </a>
+    <!-- FlashSale Lazada -->
+    <a class="card lazada" href="/FlashSale-Lazada/">
+      <div class="card-inner">
+        <div class="left">
+          <div class="icon">⚡</div>
+          <div class="text">FlashSale<br>Lazada</div>
+        </div>
+        <img class="logo" src="https://img.lazcdn.com/us/domino/a96c58a6a88070c43bc63444f6774f51.png">
+      </div>
+    </a>
 
-	  <a class="card lazada" href="/Toan_san_Lazada/">
-	    <span class="label">🛒 Toàn sàn Lazada</span>
-	    <img class="logo"
-	      src="https://img.lazcdn.com/us/domino/a96c58a6a88070c43bc63444f6774f51.png"
-	      alt="Lazada">
-	  </a>
+    <!-- Toàn sàn Lazada -->
+    <a class="card lazada" href="/Toan_san_Lazada/">
+      <div class="card-inner">
+        <div class="left">
+          <div class="icon">🛒</div>
+          <div class="text">Toàn sàn<br>Lazada</div>
+        </div>
+        <img class="logo" src="https://img.lazcdn.com/us/domino/a96c58a6a88070c43bc63444f6774f51.png">
+      </div>
+    </a>
 
-	</div>
+  </div>
 
 </div>
 
