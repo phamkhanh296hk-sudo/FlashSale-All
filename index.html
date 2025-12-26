@@ -41,21 +41,24 @@ body{
 }
 
 .flash-note{
-  font-size:18px;
+  font-size:14px;
   line-height:1.6;
-  margin-bottom:14px;
+  margin-bottom:2px;
 }
 .cta-row{
   display:flex;
-  align-items:center; /* 👈 cùng hàng */
-  gap:10px;
+  align-items:center;
+  gap:6px;
+  margin-top:0;        /* 👈 bỏ khoảng cách trên */
 }
+
 .hand{
-  display:inline-block;
-  font-size:36px; /* to gấp ~2 lần */
-  margin-left:8px;
+  display:flex;                 /* 👈 đổi từ inline-block */
+  align-items:center;           /* 👈 căn giữa theo nút */
+  font-size:36px;
   animation:point 1.2s infinite ease-in-out;
 }
+
 
 /* ===== Cards ===== */
 .container{
@@ -113,8 +116,8 @@ body{
   transform:translateY(-50%);
 }
 .join-btn{
-  display:inline-block;
-  margin-top:18px;
+  display:inline-flex;          /* 👈 quan trọng */
+  align-items:center;           /* 👈 căn giữa theo chiều dọc */
   padding:12px 26px;
   background:#1e88ff;
   color:#fff;
@@ -124,7 +127,9 @@ body{
   text-decoration:none;
   transition:.25s;
   box-shadow:0 10px 25px rgba(30,136,255,.35);
+  margin-top:0;                 /* ❌ bỏ margin-top */
 }
+
 
 .join-btn:hover{
   transform:translateY(-2px);
@@ -132,7 +137,7 @@ body{
   background:#0f6fe6;
 }
 .headline{
-  font-size:15px;
+  font-size:14px;
   font-weight:800;
   letter-spacing:.5px;
   color:#1e88ff;
@@ -165,7 +170,7 @@ body{
   <div class="banner">
     <h1>⚡ DEAL HOT ĐÂY</h1>
     <div class="headline">
-      CẬP NHẬT LIÊN TỤC DEAL SHOPEE & LAZADA
+      LIÊN TỤC CẬP NHẬT DEAL SHOPEE & LAZADA
     </div>
     <div class="flash-note">
       Tham gia cộng động để nhận thông báo deal hời 24/7 ngay
