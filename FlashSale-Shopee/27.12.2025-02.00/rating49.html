@@ -3,7 +3,6 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="/FlashSale-Shopee/">
 <title>⚡ FlashSale Shopee</title>
 
@@ -153,42 +152,46 @@ input:focus{
 
 /* Mobile */
 @media (max-width:1024px){
-
-  body{
-    padding:0;
+  select{
+    background-size:42px;   /* 👈 MŨI TÊN TO */
+    padding-right:70px;
   }
-
-  /* NỀN FULL */
+  .join-btn{
+    font-size:28px;
+    padding:22px 48px;
+  }
   .panel{
     width:100%;
-    max-width:none;
-    margin:0 0 12px 0;
-    padding:16px;
-    border-radius:0;
+    max-width:none;   /* 👈 QUAN TRỌNG NHẤT */
+    margin-left:0;
+    margin-right:0;
   }
-
-  h1,
-  .flash-note,
-  .flash-note + div{
-    padding:0 16px;
+  .flash-note{
+    font-size:2.2rem;
   }
-
   .grid{
-    width:100%;
-    padding:0 8px;
+    width: 100%;
     grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid-filter{
+    grid-template-columns:1fr;
   }
 
   select,
   input{
-    width:100%;
-    font-size:16px;
+    width: 100%;          /* 👈 QUAN TRỌNG */
+    font-size: 3rem;      /* chỉnh chữ tại đây */
+    padding: 0.7em 0.9em;
   }
 
   label{
-    font-size:16px;
+    font-size: 3rem;    /* chỉnh label tại đây */
   }
 }
+
+
+
 
 /* ===== CARD ===== */
 .card{
@@ -431,7 +434,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766767387`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766767473`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
