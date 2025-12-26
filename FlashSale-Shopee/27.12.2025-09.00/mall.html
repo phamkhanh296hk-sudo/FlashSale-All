@@ -88,16 +88,43 @@ select,
 input{
   width: calc(
     2 * (100vw - 5 * clamp(10px,1.5vw,16px)) / 6
-  );                    /* 👈 = 2 card */
+  );                    /* = 2 card */
 
-  padding: 0.6em 0.8em; /* 👈 chiều cao theo chữ */
-  font-size: 1.2cqw;      /* 👈 chữ scale theo khung */
-
-  border:1px solid #dcdcdc;
-  border-radius:10px;
+  padding: 0.6em 0.8em;
+  font-size: 1.2cqw;
   line-height:1.2;
+
+  /* 🔥 FIX VIỀN NHẠT */
+  border:2px solid #b5b5b5;
+  border-radius:10px;
+
+  /* 🔥 CHUẨN UX */
+  transition: border-color .2s, box-shadow .2s;
+}
+select{
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'><path d='M7 10l5 5 5-5z'/></svg>")
+    no-repeat right 16px center;
+
+  background-size:24px;   /* WEB */
+  padding-right:48px;
 }
 
+select:hover,
+input:hover{
+  border-color:#ee4d2d;
+}
+
+select:focus,
+input:focus{
+  outline:none;
+  border-color:#ee4d2d;
+  box-shadow:0 0 0 3px rgba(238,77,45,.2);
+}
 
 
 /* ===== PRODUCT GRID ===== */
@@ -110,10 +137,30 @@ input{
   gap:clamp(10px,1.5vw,16px);
 }
 
+.join-btn{
+  display:inline-block;
+  margin-left:10px;
+  background:#1e71ff;
+  color:#fff;
+  font-weight:800;
+  text-decoration:none;
+  border-radius:18px;
+
+  /* WEB */
+  font-size:22px;
+  padding:16px 36px;
+}
 
 /* Mobile */
 @media (max-width:1024px){
-
+  select{
+    background-size:42px;   /* 👈 MŨI TÊN TO */
+    padding-right:70px;
+  }
+  .join-btn{
+    font-size:28px;
+    padding:22px 48px;
+  }
   .panel{
     width: 100%;
   }
@@ -304,18 +351,7 @@ input{
   <a
     href="https://t.me/dealhotday"
     target="_blank"
-    style="
-      display:inline-block;
-      margin-left:10px;
-      padding:22px 48px;     /* 👈 NÚT TO GẤP ĐÔI */
-      background:#1e71ff;
-      color:#fff;
-      font-weight:800;
-      font-size:28px;        /* 👈 CHỮ TRONG NÚT TO GẤP ĐÔI */
-      border-radius:18px;
-      text-decoration:none;
-      vertical-align:middle;
-    "
+    class="join-btn"
   >
     Tham gia ngay
   </a>
@@ -396,7 +432,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766765143`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766765256`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
