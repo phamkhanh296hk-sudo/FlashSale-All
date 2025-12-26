@@ -162,7 +162,9 @@ input:focus{
   }
   .panel{
     width:100%;
-    max-width:100%;
+    max-width:none;   /* 👈 QUAN TRỌNG NHẤT */
+    margin-left:0;
+    margin-right:0;
   }
   .flash-note{
     font-size:2.2rem;
@@ -432,7 +434,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766766159`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766766488`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
