@@ -95,7 +95,7 @@ input{
   line-height:1.2;
 
   /* 🔥 FIX VIỀN NHẠT */
-  border:2px solid #b5b5b5;
+  border:3px solid #b5b5b5;
   border-radius:10px;
 
   /* 🔥 CHUẨN UX */
@@ -123,7 +123,7 @@ select:focus,
 input:focus{
   outline:none;
   border-color:#ee4d2d;
-  box-shadow:0 0 0 3px rgba(238,77,45,.2);
+  box-shadow:0 0 0 4px rgba(238,77,45,.25);
 }
 
 
@@ -432,7 +432,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766765256`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766765536`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
