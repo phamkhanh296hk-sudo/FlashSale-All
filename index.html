@@ -46,10 +46,11 @@ body{
   margin-bottom:2px;
 }
 .cta-row{
+  position:relative;     /* ✅ mốc để căn giữa nút */
   display:flex;
   align-items:center;
   gap:6px;
-  margin-top:0;        /* 👈 bỏ khoảng cách trên */
+  margin-top:0;
 }
 
 .hand{
@@ -121,18 +122,21 @@ body{
   padding:12px 26px;
   background:#1e88ff;
   color:#fff;
-  font-size:16px;
+  font-size:15px;
   font-weight:700;
   border-radius:12px;
   text-decoration:none;
   transition:.25s;
   box-shadow:0 10px 25px rgba(30,136,255,.35);
   margin-top:0;                 /* ❌ bỏ margin-top */
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
 }
 
 
 .join-btn:hover{
-  transform:translateY(-2px);
+  transform:translateX(-50%) scale(1.05); /* ✅ giữ X + phóng to */
   box-shadow:0 14px 30px rgba(30,136,255,.45);
   background:#0f6fe6;
 }
@@ -173,7 +177,7 @@ body{
       LIÊN TỤC CẬP NHẬT DEAL SHOPEE & LAZADA
     </div>
     <div class="flash-note">
-      Tham gia cộng động để nhận thông báo deal hời 24/7 ngay
+      Tham gia cộng động Telegram để nhận thông báo deal hời 24/7 ngay
     </div>
 
     <div class="cta-row">
