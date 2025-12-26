@@ -46,16 +46,15 @@ h1{
   padding:16px;
   border-radius:12px;
   margin-bottom:20px;
-  max-width: calc(
-    1.25 * (
-      6 * ((100vw - 5 * clamp(10px,1.5vw,16px)) / 6)
-      + 5 * clamp(10px,1.5vw,16px)
-    )
-  );
+
+  /* 👉 rộng hơn 1.25 lần nhưng KHÔNG lệch */
   width:100%;
+  max-width:125%;
+
   margin-left:auto;
   margin-right:auto;
 }
+
 .grid-filter{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -73,20 +72,18 @@ label{
 }
 select,
 input{
-  width: calc(
-    1.25 * (
-      2 * (100vw - 5 * clamp(10px,1.5vw,16px)) / 6
-    )
-  );
-  padding: 0.6em 0.8em;
-  font-size: 1.2cqw;
+  width:100%;          /* 👈 full theo panel (panel đã to 1.25×) */
+
+  padding:0.6em 0.8em;
+  font-size:1.2cqw;
   line-height:1.2;
-  /* 🔥 FIX VIỀN NHẠT */
+
   border:3px solid #b5b5b5;
   border-radius:10px;
-  /* 🔥 CHUẨN UX */
+
   transition: border-color .2s, box-shadow .2s;
 }
+
 select{
   appearance:none;
   -webkit-appearance:none;
@@ -369,7 +366,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766768237`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766768809`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
