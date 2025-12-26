@@ -95,7 +95,7 @@ input{
   line-height:1.2;
 
   /* 🔥 FIX VIỀN NHẠT */
-  border:3px solid #8a8a8a;
+  border:3px solid #444;
   border-radius:10px;
 
   /* 🔥 CHUẨN UX */
@@ -432,7 +432,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766765763`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766765845`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
