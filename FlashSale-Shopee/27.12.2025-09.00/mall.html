@@ -152,67 +152,45 @@ input:focus{
 
 /* Mobile */
 @media (max-width:1024px){
-
-  /* ===== RESET GỐC CHO MOBILE ===== */
-  body{
-    padding:0;          /* 👈 CẮT NGUỒN HỞ MÉP */
+  select{
+    background-size:42px;   /* 👈 MŨI TÊN TO */
+    padding-right:70px;
   }
-
-  /* ===== BANNER / HEADER ===== */
-  h1,
-  .flash-note,
-  .flash-note + div{
-    padding-left:16px;
-    padding-right:16px;
-  }
-
-  /* ===== NÚT TELEGRAM ===== */
   .join-btn{
     font-size:28px;
     padding:22px 48px;
   }
-
-  /* ===== FILTER PANEL ===== */
   .panel{
     width:100%;
-    max-width:none;     /* 👈 CẮT CÔNG THỨC DESKTOP */
-    margin:0 0 16px 0;
-    padding:16px;
-    border-radius:0;    /* 👈 full như app */
+    max-width:none;   /* 👈 QUAN TRỌNG NHẤT */
+    margin-left:0;
+    margin-right:0;
+  }
+  .flash-note{
+    font-size:2.2rem;
+  }
+  .grid{
+    width: 100%;
+    grid-template-columns:repeat(2,1fr);
   }
 
   .grid-filter{
     grid-template-columns:1fr;
   }
 
-  /* ===== INPUT / SELECT ===== */
   select,
   input{
-    width:100%;         /* 👈 CẮT CALC */
-    max-width:100%;
-    font-size:3rem;
-    padding:0.7em 0.9em;
+    width: 100%;          /* 👈 QUAN TRỌNG */
+    font-size: 3rem;      /* chỉnh chữ tại đây */
+    padding: 0.7em 0.9em;
   }
 
   label{
-    font-size:3rem;
+    font-size: 3rem;    /* chỉnh label tại đây */
   }
-
-  /* ===== MŨI TÊN SELECT ===== */
-  select{
-    background-size:42px;
-    padding-right:70px;
-  }
-
-  /* ===== GRID SẢN PHẨM ===== */
-  .grid{
-    width:100%;
-    padding-left:8px;   /* cho card thở nhẹ */
-    padding-right:8px;
-    grid-template-columns:repeat(2,1fr);
-  }
-
 }
+
+
 
 
 /* ===== CARD ===== */
@@ -456,7 +434,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766766766`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766766829`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
