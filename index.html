@@ -30,7 +30,7 @@ body{
   background:linear-gradient(135deg,#d9f3ff,#eefaff);
   border-radius:20px;
   padding:30px 25px;
-  text-align:center;
+  text-align:left; /* ❗ căn trái */
   margin-bottom:40px;
 }
 
@@ -41,8 +41,20 @@ body{
 }
 
 .flash-note{
-  font-size:16px;
+  font-size:18px;
   line-height:1.6;
+  margin-bottom:14px;
+}
+.cta-row{
+  display:flex;
+  align-items:center; /* 👈 cùng hàng */
+  gap:10px;
+}
+.hand{
+  display:inline-block;
+  font-size:36px; /* to gấp ~2 lần */
+  margin-left:8px;
+  animation:point 1.2s infinite ease-in-out;
 }
 
 /* ===== Cards ===== */
@@ -100,10 +112,41 @@ body{
   top:50%;
   transform:translateY(-50%);
 }
+.join-btn{
+  display:inline-block;
+  margin-top:18px;
+  padding:12px 26px;
+  background:#1e88ff;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  border-radius:12px;
+  text-decoration:none;
+  transition:.25s;
+  box-shadow:0 10px 25px rgba(30,136,255,.35);
+}
+
+.join-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px rgba(30,136,255,.45);
+  background:#0f6fe6;
+}
+.headline{
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.5px;
+  color:#1e88ff;
+  margin-bottom:6px;
+}
 
 
 /* ===== Mobile ===== */
-@media(max-width:768px){
+@keyframes point{
+  0%{transform:translateX(0)}
+  50%{transform:translateX(6px)}
+  100%{transform:translateX(0)}
+}
+@media(max-width:1024px){
   .text{
     font-size:20px;
   }
@@ -121,14 +164,21 @@ body{
   <!-- Banner -->
   <div class="banner">
     <h1>⚡ DEAL HOT ĐÂY</h1>
+    <div class="headline">
+      CẬP NHẬT LIÊN TỤC DEAL SHOPEE & LAZADA
+    </div>
     <div class="flash-note">
-      ⚡ <strong>DEAL SHOPEE & LAZADA ĐƯỢC CẬP NHẬT LIÊN TỤC</strong><br>
-      👉 Tham gia ngay để không bỏ lỡ các deal hot:<br>
-      <a href="https://t.me/dealhotday" target="_blank">
-        https://t.me/dealhotday
+      Tham gia cộng động để nhận thông báo deal hời 24/7 ngay
+    </div>
+
+    <div class="cta-row">
+      <span class="hand">👉</span>
+      <a class="join-btn" href="https://t.me/dealhotday" target="_blank">
+        Tham gia ngay
       </a>
     </div>
   </div>
+
 
   <!-- Menu -->
   <div class="container">
