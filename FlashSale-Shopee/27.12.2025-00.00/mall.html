@@ -14,103 +14,103 @@
 
 body{
   font-family:"Manrope",sans-serif;
-  background:#f5f5f5;
+  background:#111;
   margin:0;
   padding:16px;
+  color:#eee;
 }
 
 /* ===== TITLE ===== */
 h1{
   text-align:center;
   color:#ee4d2d;
-  font-size:36px;
-  margin-bottom:20px;
+  font-size:32px;
+  margin:20px 0;
 }
 
 .flash-note{
   text-align:center;
   font-size:14px;
   line-height:1.6;
-  color:#555;
-  margin-bottom:20px;
+  color:#aaa;
+  margin-bottom:16px;
 }
 
 /* ===== JOIN ===== */
 .join-btn{
   display:inline-block;
-  margin-left:10px;
   background:#1e71ff;
   color:#fff;
-  font-weight:800;
+  font-weight:700;
   text-decoration:none;
-  border-radius:18px;
-  font-size:22px;
-  padding:16px 36px;
+  border-radius:14px;
+  font-size:18px;
+  padding:14px 28px;
 }
 
 /* ===== FILTER PANEL ===== */
 .panel{
-  background:#fff;
+  background:#1c1c1c;
   padding:16px;
   border-radius:12px;
   margin:0 auto 20px;
-
-  /* 🔥 căn chuẩn – không lệch */
-  max-width:1440px;
+  max-width:1280px;
   width:100%;
 }
 
 .grid-filter{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:24px;
+  gap:16px;
 }
 
 label{
+  font-size:14px;
   font-weight:600;
-  margin-bottom:8px;
+  margin-bottom:6px;
 }
 
 select,
 input{
   width:100%;
-  padding:0.6em 0.8em;
-  font-size:16px;
-  border:3px solid #b5b5b5;
+  height:44px;                 /* 🔥 KHÓA CHIỀU CAO */
+  padding:0 12px;
+  font-size:14px;              /* 🔥 KHÔNG DÙNG rem */
+  border:2px solid #444;
   border-radius:10px;
+  background:#222;
+  color:#eee;
 }
 
 select{
   appearance:none;
   background:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'><path d='M7 10l5 5 5-5z'/></svg>")
-    no-repeat right 16px center;
-  background-size:24px;
-  padding-right:48px;
+    #222
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23aaa'><path d='M7 10l5 5 5-5z'/></svg>")
+    no-repeat right 12px center;
+  background-size:18px;
+  padding-right:36px;
 }
 
 /* ===== PRODUCT GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(6,1fr);
-  gap:16px;
+  gap:12px;
 }
 
 /* ===== CARD ===== */
 .card{
-  background:#fff;
-  border-radius:15px;
+  background:#1c1c1c;
+  border-radius:14px;
   padding:8px;
   position:relative;
-  display:flex;
-  flex-direction:column;
-  border:3px solid #000;
+  border:2px solid #000;
 }
 
 .card a{
-  width:100%;
-  aspect-ratio:1/1;
   display:block;
+  aspect-ratio:1/1;
 }
 
 .card img{
@@ -122,24 +122,24 @@ select{
 
 .badge{
   position:absolute;
-  top:8px;
-  left:8px;
+  top:6px;
+  left:6px;
   background:#e60000;
   color:#fff;
-  font-size:14px;
-  padding:4px 6px;
+  font-size:12px;
+  padding:2px 6px;
   border-radius:6px;
 }
 
 .shop-badge{
   position:absolute;
-  top:8px;
-  right:8px;
-  font-size:13px;
-  padding:4px 6px;
+  top:6px;
+  right:6px;
+  font-size:11px;
+  padding:2px 6px;
   border-radius:6px;
-  color:#fff;
   font-weight:700;
+  color:#fff;
 }
 
 .mall{background:#d0011b}
@@ -147,43 +147,43 @@ select{
 .preferred-plus{background:#ee4d2d}
 
 .name{
-  font-size:18px;
-  font-weight:800;
+  font-size:14px;
+  font-weight:700;
   margin:8px 0;
-  line-height:1.25;
+  line-height:1.3;
 }
 
 .price{
-  font-size:20px;
-  font-weight:900;
-  color:#d0011b;
+  font-size:16px;
+  font-weight:800;
+  color:#ff4d4f;
 }
 
 .before{
-  font-size:16px;
+  font-size:13px;
   text-decoration:line-through;
-  color:#999;
-  margin-left:6px;
+  color:#888;
+  margin-left:4px;
 }
 
 .meta{
-  font-size:14px;
-  color:#666;
-  margin-top:8px;
+  font-size:12px;
+  color:#aaa;
+  margin-top:6px;
 }
 
 /* ===== TO TOP ===== */
 #toTop{
   position:fixed;
-  bottom:32px;
-  right:32px;
-  width:80px;
-  height:80px;
+  bottom:20px;
+  right:20px;
+  width:56px;
+  height:56px;
   border-radius:50%;
   background:#1e71ff;
   color:#fff;
   border:none;
-  font-size:40px;
+  font-size:26px;
   display:none;
   cursor:pointer;
   z-index:999;
@@ -191,41 +191,38 @@ select{
 
 /* ===== MOBILE ===== */
 @media (max-width:1024px){
-  body{padding:0}
+  body{padding:8px}
 
   .panel{
-    max-width:none;
-    border-radius:0;
-    padding:20px;
+    border-radius:10px;
+    padding:14px;
   }
 
   .grid-filter{
     grid-template-columns:1fr;
+    gap:14px;
   }
 
   .grid{
-    grid-template-columns:repeat(2,1fr); /* 🔥 2 SP / hàng */
+    grid-template-columns:repeat(2,1fr); /* ✅ 2 SP / hàng */
+  }
+
+  label{
+    font-size:15px;
   }
 
   select,input{
-    font-size:3rem;
-    padding:0.7em 0.9em;
-  }
-
-  label{font-size:3rem}
-
-  select{
-    background-size:42px;
-    padding-right:70px;
+    height:48px;
+    font-size:15px;
   }
 
   .join-btn{
-    font-size:28px;
-    padding:22px 48px;
+    font-size:20px;
+    padding:16px 32px;
   }
 
   .flash-note{
-    font-size:2.2rem;
+    font-size:15px;
   }
 }
 </style>
@@ -237,11 +234,11 @@ select{
 
 <div class="flash-note">
   ⚡ <strong>SĂN DEAL 1K, 9K, DEAL HOT, LỖI GIÁ</strong><br>
-  Tham gia cộng đồng Telegram để cập nhật thêm deal FLASHSALE các khung giờ
+  Tham gia cộng đồng Telegram để cập nhật deal FLASHSALE
 </div>
 
 <div style="text-align:center; margin-bottom:16px;">
-  👉 <a href="https://t.me/dealhotday" target="_blank" class="join-btn">Tham gia ngay</a>
+  <a href="https://t.me/dealhotday" target="_blank" class="join-btn">👉 Tham gia ngay</a>
 </div>
 
 <form class="panel" onsubmit="return false;">
@@ -305,7 +302,7 @@ function renderNext(){
       </div>
       <div class="meta">
         📦 Kho ${it.stock}<br>
-        ⭐ ${it.rating}/5 (${it.rating_count} đánh giá)
+        ⭐ ${it.rating}/5 (${it.rating_count})
       </div>
     </div>
   `).join(""));
@@ -330,4 +327,3 @@ new IntersectionObserver(e=>{
 
 </body>
 </html>
-
