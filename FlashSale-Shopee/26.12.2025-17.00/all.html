@@ -295,20 +295,24 @@ input{
   Tham gia cộng đồng Telegram để cập nhật thêm deal FLASHSALE các khung giờ
 </div>
 
-<div style="text-align:center; margin-top:2px;">
-  <span style="font-size:24px; vertical-align:middle;">👉</span>
+<div style="text-align:center; margin-top:4px;">
+  <span style="
+    font-size:48px;          /* 👈 TAY TO GẤP ĐÔI */
+    vertical-align:middle;
+  ">👉</span>
+
   <a
     href="https://t.me/dealhotday"
     target="_blank"
     style="
       display:inline-block;
-      margin-left:6px;
-      padding:14px 30px;        /* 👈 nút to hơn */
+      margin-left:10px;
+      padding:22px 48px;     /* 👈 NÚT TO GẤP ĐÔI */
       background:#1e71ff;
       color:#fff;
       font-weight:800;
-      font-size:16px;           /* 👈 chữ to hơn */
-      border-radius:12px;
+      font-size:28px;        /* 👈 CHỮ TRONG NÚT TO GẤP ĐÔI */
+      border-radius:18px;
       text-decoration:none;
       vertical-align:middle;
     "
@@ -392,7 +396,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766736261`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766736325`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
