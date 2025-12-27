@@ -24,11 +24,9 @@ body{
 ===================================================== */
 
 .container{
-  max-width:1240px;
-  margin:0 auto;
+  width:100%;
   padding:0 8px;
 }
-
 /* TITLE */
 h1{
   text-align:center;
@@ -316,50 +314,8 @@ input{
   box-shadow:0 4px 12px rgba(0,0,0,.2);
   z-index:999;
 }
-/* =====================================================
-   MOBILE TEXT SCALE x2 (CHỈ MOBILE)
-===================================================== */
-@media (max-width:1024px){
 
-/* 1️⃣ CHỮ BANNER FILTER (LABEL) */
-label{
-  font-size:2rem;          /* từ 1rem → x2 */
-}
 
-/* INPUT / SELECT TEXT (để cân đối với label) */
-select,
-input{
-  font-size:1.9rem;        /* từ .95rem → x2 */
-  padding:14px;
-}
-
-/* 2️⃣ SHOP BADGE (Mall) */
-.shop-badge{
-  font-size:1.5rem;        /* từ .75rem → x2 */
-  padding:6px 14px;
-  border-radius:6px;
-}
-
-/* (tuỳ chọn) BADGE GIẢM GIÁ */
-.badge{
-  font-size:7cqw;          /* từ 3.5cqw → x2 */
-  padding:.4em .7em;
-}
-
-/* 3️⃣ TÊN SẢN PHẨM */
-.name{
-  font-size:1.6rem;        /* từ .8rem → x2 */
-  line-height:1.35;
-  height:2.7em;            /* vẫn khoá 2 dòng */
-}
-
-/* 4️⃣ META: KHO + ĐÁNH GIÁ */
-.meta{
-  font-size:1.55rem;       /* từ .78rem → x2 */
-  line-height:1.5;
-  gap:6px;
-}
-}
 </style>
 
 
@@ -447,7 +403,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766852692`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766853045`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
