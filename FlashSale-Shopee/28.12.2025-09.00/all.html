@@ -151,6 +151,8 @@ input{
   display:flex;
   flex-direction:column;
   gap:5px;
+  flex:0 0 auto;        /* 👈 FIX: không kéo cao card */
+  min-height:unset;    /* 👈 FIX: đồng đều chiều cao */
 }
 
 .name{
@@ -189,6 +191,7 @@ input{
   display:flex;
   flex-direction:column;
   gap:4px;
+  justify-content:flex-start; /* 👈 FIX: đúng HTML_TEMPLATE */
 }
 
 /* =====================================================
@@ -315,6 +318,7 @@ input{
 }
 </style>
 
+
 </head>
 <body>
 <div class="container">
@@ -399,7 +403,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766851920`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766852293`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
