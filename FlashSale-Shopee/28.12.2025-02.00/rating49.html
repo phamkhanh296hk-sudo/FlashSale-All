@@ -11,23 +11,24 @@
 *{box-sizing:border-box;margin:0;padding:0}
 
 /* =====================================================
-   GLOBAL – MOBILE FIRST (HTML 1)
+   GLOBAL
 ===================================================== */
 body{
   font-family:"Manrope",sans-serif;
   background:#f5f5f5;
 }
 
-/* CONTAINER */
+/* =====================================================
+   MOBILE MODE = HTML 1 (DEFAULT)
+===================================================== */
+
 .container{
   max-width:1240px;
   margin:0 auto;
   padding:0 8px;
 }
 
-/* =====================================================
-   TITLE + NOTE (MOBILE)
-===================================================== */
+/* TITLE */
 h1{
   text-align:center;
   color:#ee4d2d;
@@ -52,7 +53,7 @@ h1{
 }
 
 /* =====================================================
-   FILTER PANEL – MOBILE
+   FILTER – MOBILE
 ===================================================== */
 .panel{
   background:#fff;
@@ -92,7 +93,7 @@ input{
 }
 
 /* =====================================================
-   CARD – MOBILE (HTML 1)
+   CARD – MOBILE (HTML 1 CHUẨN)
 ===================================================== */
 .card{
   background:#fff;
@@ -103,13 +104,13 @@ input{
   display:block;
 }
 
-/* IMAGE */
 .card a{
   aspect-ratio:1 / 1;
   width:100%;
   display:flex;
   align-items:center;
   justify-content:center;
+  overflow:hidden;
 }
 
 .card img{
@@ -144,6 +145,13 @@ input{
 }
 
 /* INFO */
+.product-info{
+  padding:8px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
 .name{
   font-size:.8rem;
   font-weight:700;
@@ -153,6 +161,12 @@ input{
   display:-webkit-box;
   -webkit-line-clamp:2;
   -webkit-box-orient:vertical;
+}
+
+.price-container{
+  display:flex;
+  align-items:baseline;
+  gap:6px;
 }
 
 .price{
@@ -177,29 +191,11 @@ input{
 }
 
 /* =====================================================
-   TO TOP – MOBILE
-===================================================== */
-#toTop{
-  position:fixed;
-  bottom:70px;
-  right:16px;
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  background:#ee4d2d;
-  color:#fff;
-  border:none;
-  font-size:1.6rem;
-  display:none;
-  box-shadow:0 4px 12px rgba(0,0,0,.2);
-  z-index:999;
-}
-
-/* =====================================================
-   DESKTOP MODE – HTML 1 (≥1025px)
+   DESKTOP MODE = HTML 1 (≥1025px)
 ===================================================== */
 @media (min-width:1025px){
 
+/* BIẾN CHUNG */
 :root{
   --gap: clamp(10px,1.5vw,16px);
   --col: calc((100% - 5 * var(--gap)) / 6);
@@ -246,7 +242,7 @@ input{
   padding:.6em .8em;
 }
 
-/* GRID DESKTOP */
+/* GRID */
 .grid{
   grid-template-columns:repeat(6,var(--col));
   gap:var(--gap);
@@ -297,7 +293,27 @@ input{
   border-radius:10px;
 }
 }
+
+/* =====================================================
+   TO TOP
+===================================================== */
+#toTop{
+  position:fixed;
+  bottom:70px;
+  right:16px;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:#ee4d2d;
+  color:#fff;
+  border:none;
+  font-size:1.6rem;
+  display:none;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
+  z-index:999;
+}
 </style>
+
 </head>
 <body>
 <div class="container">
@@ -382,7 +398,7 @@ window.addEventListener("scroll", () => {
   // load slots.json
   let slots = [];
   try {
-    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766850983`);
+    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1766851181`);
     slots = await res.json();
   } catch (e) {
     console.error("Không load được slots.json", e);
